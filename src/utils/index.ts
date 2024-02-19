@@ -1,16 +1,4 @@
 import { currency as currencyConfig } from '../config'
-// @ts-ignore
-import { goto } from '$app/navigation'
-
-let allToasts: any
-
-export const goback = () => {
-  if (history.length < 3) {
-    goto('/')
-  } else {
-    window.history.go(-1)
-  }
-}
 
 export function constructURL2(url: string, fl: any) {
   url += '?'

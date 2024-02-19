@@ -163,9 +163,6 @@ devDependencies:
   svelte-timeago:
     specifier: 0.1.2
     version: 0.1.2
-  svelte-toasts:
-    specifier: ^1.1.2
-    version: 1.1.2
   sveltekit-medusa-client:
     specifier: 3.1.2
     version: 3.1.2(svelte@4.2.11)
@@ -8489,10 +8486,6 @@ packages:
 
   /svelte-timeago@0.1.2:
     resolution: {integrity: sha512-+RcFlbbhrnPYdcp9hF5QbNasr2F8NRRLd6VmfK+c/l57WlCDEGI1rmOZQvxtLx2tYjevh/B9m/3RxfQT6X7Lqw==}
-    dev: true
-
-  /svelte-toasts@1.1.2:
-    resolution: {integrity: sha512-m+yL4eEKXyJoyjTYaH1j1GFwF0Pi8YDqnVfwWPDmwi4712iZesv+TNCmToSNlav3R5Vkmc8ZBRkT8DOcu3sywQ==}
     dev: true
 
   /svelte@4.2.11:

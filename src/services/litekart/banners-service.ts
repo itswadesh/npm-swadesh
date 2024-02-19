@@ -1,59 +1,50 @@
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-import { error } from '@sveltejs/kit'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchBanners = async ({
   origin,
   pageId,
   storeId,
+  isServer,
   sid = null
 }: any) => {
-  try {
-    let res: any = {}
+  let res: any = {}
 
-    if (isServer) {
-      res = await getBySid(
-        `banners?pageId=${pageId}&store=${storeId}&active=true`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `banners?pageId=${pageId}&store=${storeId}&active=true`,
-        origin
-      )
-    }
-
-    return res.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
+  if (isServer) {
+    res = await getBySid(
+      `banners?pageId=${pageId}&store=${storeId}&active=true`,
+      sid
+    )
+  } else {
+    res = await getAPI(
+      `banners?pageId=${pageId}&store=${storeId}&active=true`,
+      origin
+    )
   }
+
+  return res.data || []
 }
 
 export const fetchBannersGroup = async ({
   origin,
   storeId,
   pageId,
+  isServer,
   sid = null
 }: any) => {
-  try {
-    let res: any = {}
+  let res: any = {}
 
-    if (isServer) {
-      res = await getBySid(
-        `banners?pageId=${pageId}&store=${storeId}&active=true`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `banners?pageId=${pageId}&store=${storeId}&active=true`,
-        origin
-      )
-    }
-
-    return res.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
+  if (isServer) {
+    res = await getBySid(
+      `banners?pageId=${pageId}&store=${storeId}&active=true`,
+      sid
+    )
+  } else {
+    res = await getAPI(
+      `banners?pageId=${pageId}&store=${storeId}&active=true`,
+      origin
+    )
   }
+
+  return res.data || []
 }

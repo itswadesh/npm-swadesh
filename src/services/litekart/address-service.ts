@@ -1,52 +1,48 @@
 import { getAPI } from './../../utils/api'
 import { getBySid, postBySid, delBySid } from './../../utils/server'
-import { error } from '@sveltejs/kit'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchAddresses = async ({
   origin,
   storeId,
+  isServer,
   isCors = false,
   sid = null
 }) => {
-  try {
-    let res: any = {}
-    let preSelectedAddress = ''
-    let myAddresses = []
+  let res: any = {}
+  let preSelectedAddress = ''
+  let myAddresses = []
 
-    if (isServer || isCors) {
-      res = await getBySid(`addresses/my?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`addresses/my?store=${storeId}`, origin)
-    }
-    preSelectedAddress = res?.data[0]?._id
-    myAddresses = res?.data || []
+  if (isServer || isCors) {
+    res = await getBySid(`addresses/my?store=${storeId}`, sid)
+  } else {
+    res = await getAPI(`addresses/my?store=${storeId}`, origin)
+  }
+  preSelectedAddress = res?.data[0]?._id
+  myAddresses = res?.data || []
 
-    return {
-      myAddresses: { data: myAddresses },
-      preSelectedAddress,
-      count: res?.count
-    }
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
+  return {
+    myAddresses: { data: myAddresses },
+    preSelectedAddress,
+    count: res?.count
   }
 }
 
-export const fetchAddress = async ({ origin, storeId, sid = null, id }) => {
-  try {
-    let res: any = {}
+export const fetchAddress = async ({
+  origin,
+  storeId,
+  isServer,
+  sid = null,
+  id
+}) => {
+  let res: any = {}
 
-    if (isServer) {
-      res = await getBySid(`addresses/${id}?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`addresses/${id}`, origin)
-    }
-
-    return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
+  if (isServer) {
+    res = await getBySid(`addresses/${id}?store=${storeId}`, sid)
+  } else {
+    res = await getAPI(`addresses/${id}`, origin)
   }
+
+  return res || {}
 }
 
 export const saveAddress = async ({
@@ -64,31 +60,27 @@ export const saveAddress = async ({
   origin,
   sid = null
 }) => {
-  try {
-    let res: any = {}
+  let res: any = {}
 
-    res = await postBySid(
-      `addresses`,
-      {
-        id,
-        address,
-        city,
-        country,
-        email,
-        firstName,
-        lastName,
-        phone,
-        state,
-        zip,
-        store: storeId
-      },
-      sid
-    )
+  res = await postBySid(
+    `addresses`,
+    {
+      id,
+      address,
+      city,
+      country,
+      email,
+      firstName,
+      lastName,
+      phone,
+      state,
+      zip,
+      store: storeId
+    },
+    sid
+  )
 
-    return res
-  } catch (err) {
-    error(err.status, err.message)
-  }
+  return res
 }
 
 export const editAddress = async ({
@@ -106,36 +98,28 @@ export const editAddress = async ({
   origin,
   sid = null
 }) => {
-  try {
-    let res: any = {}
-    res = await postBySid(
-      `addresses`,
-      {
-        id,
-        address,
-        city,
-        country,
-        email,
-        firstName,
-        lastName,
-        phone,
-        state,
-        zip,
-        store: storeId
-      },
-      sid
-    )
-    return res
-  } catch (err) {
-    error(err.status, err.message)
-  }
+  let res: any = {}
+  res = await postBySid(
+    `addresses`,
+    {
+      id,
+      address,
+      city,
+      country,
+      email,
+      firstName,
+      lastName,
+      phone,
+      state,
+      zip,
+      store: storeId
+    },
+    sid
+  )
+  return res
 }
 
 export const deleteAddress = async ({ id, storeId, origin, sid = null }) => {
-  try {
-    const res = await delBySid(`addresses/${id}?store=${storeId}`, sid)
-    return res
-  } catch (err) {
-    error(err.status || 400, err.message)
-  }
+  const res = await delBySid(`addresses/${id}?store=${storeId}`, sid)
+  return res
 }

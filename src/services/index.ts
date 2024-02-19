@@ -1,5 +1,3 @@
-export * from './litekart'
-
 let LITEKART_API_ENDPOINT = ''
 
 export const setApiEndpoint = (endpoint: string) => {
@@ -10,3 +8,5 @@ export const setApiEndpoint = (endpoint: string) => {
 export const getApiEndpoint = () => {
   return LITEKART_API_ENDPOINT
 }
+
+export * from './litekart'

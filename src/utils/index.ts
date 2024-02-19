@@ -213,50 +213,17 @@ export const getIdFromYoutubeVideo = (url: string) => {
 }
 
 export const navigateToProperPath = (url: string) => {
-  // console.log('url =', url);
-
   if (!url) {
     return '##'
-    // } else if (url.startsWith('http')) {
-    // 	const possibleDomainUrls = [
-    // 		'https://zapvi.in/',
-    // 		'https://a.zapvi.in/',
-    // 		'https://b.zapvi.in/',
-    // 		'https://next.zapvi.in/',
-    // 		'https://live.zapvi.in/',
-    // 		'https://localhost:3000/',
-    // 		'https://localhost:3001/'
-    // 	]
-
-    // 	let originalUrl = url
-
-    // 	for (const i of possibleDomainUrls) {
-    // 		if (url?.includes(i)) {
-    // 			originalUrl = url.replace(i, '/')
-    // 		}
-    // 	}
-    // 	// console.log('originalUrl', originalUrl);
-    // 	return originalUrl
   } else if (url[0] !== '/') {
     return `/${url.trim()}`
   } else {
     return url.trim()
   }
-
-  // if (!url) return '##';
-
-  // if (url[0] !== '/') {
-  // 	return `/${url.trim()}`;
-  // } else if (url.startsWith('http') && !url.includes(origin)) {
-  // 	const urlObject = new URL(url);
-  // 	return urlObject.pathname;
-  // } else {
-  // 	return url.trim();
-  // }
 }
 
 export * from './string'
 export * from './api'
 export * from './server'
 // export * from './s3'
-export * from './validations'
+// export * from './validations'

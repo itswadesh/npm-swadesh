@@ -10,10 +10,10 @@ export const fetchProducts = async ({
   storeId
 }: any) => {
   let res: any = {}
-  const HTTP_ENDPOINT = getApiEndpoint()
+  const HTTP_ENDPOINT1 = getApiEndpoint()
   console.log(
-    'zzzzzzzzzzzzzzzzzzzzzzzzzzz',
-    HTTP_ENDPOINT,
+    'pppppppppppppppppppppp',
+    HTTP_ENDPOINT1,
     origin,
     isCors,
     sid,
@@ -22,12 +22,12 @@ export const fetchProducts = async ({
   )
   if (isServer || isCors) {
     res = await getBySid(
-      `${HTTP_ENDPOINT}/api/es/products?store=${storeId}`,
+      `${HTTP_ENDPOINT1}/api/es/products?store=${storeId}`,
       sid
     )
   } else {
     res = await getAPI(
-      `${HTTP_ENDPOINT}/api/es/products?store=${storeId}`,
+      `${HTTP_ENDPOINT1}/api/es/products?store=${storeId}`,
       origin
     )
   }

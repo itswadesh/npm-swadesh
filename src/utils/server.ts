@@ -151,7 +151,7 @@ export async function gett(endpoint: string, ck?: any) {
 
 export const getBySid = async (endpoint: string, sid?: any) => {
   try {
-    const response = await fetch(HTTP_ENDPOINT + '/api/' + endpoint, {
+    const response = await fetch(endpoint, {
       method: 'GET',
       credentials: 'include',
       headers: { cookie: `connect.sid=${sid}` }

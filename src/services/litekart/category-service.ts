@@ -1,18 +1,16 @@
-import { error } from '@sveltejs/kit'
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
 
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchFooterCategories = async ({
   isCors = false,
   origin,
   megamenu = false,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+ 
     let data: []
 
     if (isServer || isCors) {
@@ -28,9 +26,6 @@ export const fetchFooterCategories = async ({
     }
 
     return data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
 export const fetchCategory = async ({
@@ -39,9 +34,10 @@ export const fetchCategory = async ({
   isCors = false,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res = {}
 
     if (isServer || isCors) {
@@ -57,9 +53,7 @@ export const fetchCategory = async ({
     }
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+ 
 }
 
 export const fetchAllCategories = async ({
@@ -68,9 +62,10 @@ export const fetchAllCategories = async ({
   limit = null,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
 
     let catQ = `categories?store=${storeId}&page=0&limit=${limit || '1000'}`
@@ -89,9 +84,6 @@ export const fetchAllCategories = async ({
     const pageSize = res.pageSize
 
     return { data, pageSize, currentPage }
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
 export const fetchAllProductsOfCategories = async ({
@@ -99,9 +91,10 @@ export const fetchAllProductsOfCategories = async ({
   isCors = false,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
     let products = []
     let productsCount = 0
@@ -127,9 +120,7 @@ export const fetchAllProductsOfCategories = async ({
     productsCount = res?.count
 
     return { products, productsCount, currentPage, facets, err }
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const fetchMegamenuData = async ({
@@ -137,9 +128,10 @@ export const fetchMegamenuData = async ({
   megamenu = false,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let data: []
 
     if (isServer || isCors) {
@@ -155,7 +147,4 @@ export const fetchMegamenuData = async ({
     }
 
     return data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

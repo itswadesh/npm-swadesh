@@ -1,8 +1,5 @@
-import { error } from '@sveltejs/kit'
 import { getAPI, post } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const savePopularSearch = async ({
   storeId,
@@ -11,7 +8,7 @@ export const savePopularSearch = async ({
   origin,
   sid = null
 }: any) => {
-  try {
+  
     let res: any = {}
 
     res = await post(
@@ -26,18 +23,17 @@ export const savePopularSearch = async ({
     )
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const fetchPopularSearch = async ({
   origin,
   storeId,
   sid = null,
-  isCors = false
+  isCors = false,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
     if (isServer || isCors) {
       res = await getBySid(`popular-search?store=${storeId}&active=true`, sid)
@@ -46,7 +42,5 @@ export const fetchPopularSearch = async ({
     }
 
     return res.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }

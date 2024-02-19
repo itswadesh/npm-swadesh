@@ -1,16 +1,15 @@
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchDeals = async ({
   isCors = false,
   origin,
   query,
   storeId,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+  
     let res: any = {}
 
     if (isServer || isCors) {
@@ -20,7 +19,4 @@ export const fetchDeals = async ({
     }
 
     return res || {}
-  } catch (e) {
-    return {}
-  }
 }

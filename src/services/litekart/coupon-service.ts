@@ -1,16 +1,14 @@
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-import { error } from '@sveltejs/kit'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchCoupons = async ({
   isCors = false,
   origin,
   storeId,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+ 
     let res: any = {}
 
     if (isServer || isCors) {
@@ -20,7 +18,4 @@ export const fetchCoupons = async ({
     }
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

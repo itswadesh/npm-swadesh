@@ -1,11 +1,8 @@
-import { error } from '@sveltejs/kit'
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
-export const fetchFaqs = async ({ origin, storeId, sid = null }: any) => {
-  try {
+export const fetchFaqs = async ({ origin, storeId, sid = null ,isServer}: any) => {
+  
     let res: any = {}
 
     if (isServer) {
@@ -15,13 +12,10 @@ export const fetchFaqs = async ({ origin, storeId, sid = null }: any) => {
     }
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
-export const fetchFaq = async ({ slug, origin, sid = null, storeId }: any) => {
-  try {
+export const fetchFaq = async ({ slug, origin, sid = null, storeId,isServer }: any) => {
+  
     let res: any = {}
 
     if (isServer) {
@@ -31,7 +25,4 @@ export const fetchFaq = async ({ slug, origin, sid = null, storeId }: any) => {
     }
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

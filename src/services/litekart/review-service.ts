@@ -1,8 +1,6 @@
-import { error } from '@sveltejs/kit'
 import { getAPI, post } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-// @ts-ignore
-const isServer = import.meta.env.SSR
+
 
 export const fetchReviews = async ({
   isCors = false,
@@ -10,10 +8,11 @@ export const fetchReviews = async ({
   storeId,
   search,
   sort,
+  isServer,
   currentPage,
   sid = null
 }: any) => {
-  try {
+  
     let res: any = {}
 
     if (isServer || isCors) {
@@ -35,9 +34,6 @@ export const fetchReviews = async ({
       noOfPage: res.noOfPage,
       page: res.page
     }
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
 // Fetch product reviews
@@ -48,9 +44,10 @@ export const fetchProductReviews = async ({
   page,
   slug,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }: any) => {
-  try {
+  
     let productReviewsRes: any = {}
     // : ProductReviews[]
     let productReviews = []
@@ -70,9 +67,6 @@ export const fetchProductReviews = async ({
     productReviews = productReviewsRes
 
     return productReviews || []
-  } catch (e) {
-    return []
-  }
 }
 
 export const saveReview = async ({
@@ -85,7 +79,6 @@ export const saveReview = async ({
   storeId,
   origin
 }: any) => {
-  try {
     let res: any = {}
 
     res = await post(
@@ -103,7 +96,4 @@ export const saveReview = async ({
     )
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

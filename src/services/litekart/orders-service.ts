@@ -1,17 +1,14 @@
-import { error } from '@sveltejs/kit'
 import { getAPI, post } from './../../utils/api'
 import { getBySid, postBySid } from './../../utils/server'
-
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchOrders = async ({
   isCors = false,
   origin = null,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
 
     if (isServer || isCors) {
@@ -27,18 +24,17 @@ export const fetchOrders = async ({
       page: res.page,
       pageSize: res.pageSize
     }
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const fetchOrder = async ({
   origin = null,
   sid = null,
   storeId,
-  id
+  id,
+  isServer
 }) => {
-  try {
+  
     let res = {}
 
     if (isServer) {
@@ -48,13 +44,11 @@ export const fetchOrder = async ({
     }
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
-export const fetchTrackOrder = async ({ id, origin, sid = null, storeId }) => {
-  try {
+export const fetchTrackOrder = async ({ id, origin, sid = null, storeId,isServer }) => {
+  
     let res = {}
 
     if (isServer) {
@@ -64,9 +58,7 @@ export const fetchTrackOrder = async ({ id, origin, sid = null, storeId }) => {
     }
 
     return res || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const getOrder = async ({
@@ -74,9 +66,10 @@ export const getOrder = async ({
   cartId,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res = {}
 
     if (isServer) {
@@ -91,9 +84,7 @@ export const getOrder = async ({
       )
     }
     return res || {}
-  } catch (e) {
-    error(e?.status, e.data?.message || e?.message)
-  }
+  
 }
 
 export const paySuccessPageHit = async ({
@@ -103,9 +94,10 @@ export const paySuccessPageHit = async ({
   status,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res = {}
 
     if (isServer) {
@@ -134,9 +126,6 @@ export const paySuccessPageHit = async ({
     }
 
     return res || {}
-  } catch (e) {
-    error(e?.status, e.data?.message || e?.message)
-  }
 }
 
 export const codCheckout = async ({
@@ -149,7 +138,7 @@ export const codCheckout = async ({
   sid = null,
   storeId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -166,9 +155,7 @@ export const codCheckout = async ({
     )
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const phonepeCheckout = async ({
@@ -179,7 +166,7 @@ export const phonepeCheckout = async ({
   storeId,
   cartId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -197,9 +184,7 @@ export const phonepeCheckout = async ({
     )
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.message?.message || e.message)
-  }
+  
 }
 export const cashfreeCheckout = async ({
   address,
@@ -209,7 +194,7 @@ export const cashfreeCheckout = async ({
   cartId,
   storeId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -226,13 +211,11 @@ export const cashfreeCheckout = async ({
       origin
     )
     return res || {}
-  } catch (e) {
-    error(e.status, e.message?.message || e.message)
-  }
+  
 }
 
 export const cashfreeCapture = async ({ order_no, origin, sid, storeId }) => {
-  try {
+  
     let res = {}
 
     res = await postBySid(
@@ -246,9 +229,7 @@ export const cashfreeCapture = async ({ order_no, origin, sid, storeId }) => {
     )
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const razorpayCheckout = async ({
@@ -259,7 +240,7 @@ export const razorpayCheckout = async ({
   origin,
   storeId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -278,9 +259,7 @@ export const razorpayCheckout = async ({
     )
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const razorpayCapture = async ({
@@ -289,7 +268,7 @@ export const razorpayCapture = async ({
   origin,
   storeId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -305,9 +284,7 @@ export const razorpayCapture = async ({
     )
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const stripeCheckoutService = async ({
@@ -318,7 +295,7 @@ export const stripeCheckoutService = async ({
   sid = null,
   storeId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -332,9 +309,7 @@ export const stripeCheckoutService = async ({
       origin
     )
     return res || {}
-  } catch (e) {
-    error(e.status, e)
-  }
+  
 }
 
 export const paypalCheckout = async ({
@@ -344,7 +319,7 @@ export const paypalCheckout = async ({
   origin,
   storeId
 }) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -362,7 +337,5 @@ export const paypalCheckout = async ({
     )
 
     return res || {}
-  } catch (e) {
-    error(e.status, e)
-  }
+  
 }

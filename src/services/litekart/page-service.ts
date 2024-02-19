@@ -1,16 +1,14 @@
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-import { error } from '@sveltejs/kit'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchPages = async ({
   isCors = false,
   origin,
   storeId,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+  
     let res: any = {}
 
     if (isServer || isCors) {
@@ -20,17 +18,16 @@ export const fetchPages = async ({
     }
 
     return res.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const fetchLatestPages = async ({
   origin,
   storeId,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+  
     let res: any = {}
 
     if (isServer) {
@@ -46,9 +43,7 @@ export const fetchLatestPages = async ({
     }
 
     return res.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const fetchPage = async ({
@@ -57,9 +52,10 @@ export const fetchPage = async ({
   id,
   slug,
   storeId,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+  
     let res: any = {}
 
     if (isServer || isCors) {
@@ -69,7 +65,5 @@ export const fetchPage = async ({
     }
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }

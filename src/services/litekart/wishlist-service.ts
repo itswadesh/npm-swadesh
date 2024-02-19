@@ -1,15 +1,13 @@
-import { error } from '@sveltejs/kit'
 import { getAPI, post } from './../../utils/api'
 import { getBySid, postBySid } from './../../utils/server'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const moveUnavailableItemsToWishlist = async ({
   origin,
   storeId,
-  sid = null
+  sid = null,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
 
     if (isServer) {
@@ -27,9 +25,6 @@ export const moveUnavailableItemsToWishlist = async ({
     }
 
     return res || {}
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
 export const fetchWishlist = async ({
@@ -38,9 +33,10 @@ export const fetchWishlist = async ({
   search = null,
   sort = '-createdAt',
   currentPage = 1,
-  sid = null
+  sid = null,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
 
     if (isServer && sid != null) {
@@ -56,9 +52,6 @@ export const fetchWishlist = async ({
     }
 
     return res || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
 export const checkWishlist = async ({
@@ -67,11 +60,12 @@ export const checkWishlist = async ({
   pid,
   vid,
   isCors = false,
-  sid = null
+  sid = null,
+  isServer
 }) => {
   // if (!sid) return false
 
-  try {
+  
     let res: any = {}
 
     if (isServer) {
@@ -87,9 +81,6 @@ export const checkWishlist = async ({
     }
 
     return res
-  } catch (e) {
-    return false
-  }
 }
 
 export const toggleWishlistService = async ({
@@ -98,9 +89,10 @@ export const toggleWishlistService = async ({
   isCors = false,
   origin,
   sid = null,
-  storeId
+  storeId,
+  isServer
 }) => {
-  try {
+  
     let res: any = {}
 
     if (isServer || isCors) {
@@ -118,7 +110,4 @@ export const toggleWishlistService = async ({
     }
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

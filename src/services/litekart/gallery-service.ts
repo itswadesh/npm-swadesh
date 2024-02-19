@@ -1,11 +1,8 @@
-import { error } from '@sveltejs/kit'
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
-export const fetchGallery = async ({ origin, storeId, sid = null }: any) => {
-  try {
+
+export const fetchGallery = async ({ origin, storeId, sid = null,isServer }: any) => {
     let res: any = {}
 
     if (isServer) {
@@ -15,7 +12,4 @@ export const fetchGallery = async ({ origin, storeId, sid = null }: any) => {
     }
 
     return res.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

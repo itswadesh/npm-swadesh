@@ -1,11 +1,8 @@
 import { getAPI } from './../../utils/api'
 import { getBySid } from './../../utils/server'
-import { error } from '@sveltejs/kit'
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
-export const fetchCountries = async ({ origin, storeId, sid = null }: any) => {
-  try {
+export const fetchCountries = async ({ origin, storeId, sid = null,isServer }: any) => {
+ 
     let res: any = {}
 
     if (isServer) {
@@ -14,19 +11,17 @@ export const fetchCountries = async ({ origin, storeId, sid = null }: any) => {
       res = await getAPI(`countries?limit=500&page=0&store=${storeId}`, origin)
     }
 
-    return res?.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
 export const fetchStates = async ({
   origin,
   storeId,
   countryCode,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+  
     let res: any = {}
 
     if (isServer) {
@@ -42,7 +37,5 @@ export const fetchStates = async ({
     }
 
     return res?.data || []
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+ 
 }

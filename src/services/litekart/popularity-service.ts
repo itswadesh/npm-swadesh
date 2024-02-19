@@ -1,18 +1,15 @@
-import { error } from '@sveltejs/kit'
 import { post } from './../../utils/api'
 import { postBySid } from './../../utils/server'
-
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const updatePopulatiry = async ({
   pid,
   storeId,
   origin,
   isCors = false,
-  sid = null
+  sid = null,
+  isServer
 }: any) => {
-  try {
+  
     let res: any | {}
 
     if (isServer || isCors) {
@@ -22,7 +19,4 @@ export const updatePopulatiry = async ({
     }
 
     return res
-  } catch (err) {
-    error(err.status, err.message)
-  }
 }

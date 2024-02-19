@@ -1,4 +1,3 @@
-import { error } from '@sveltejs/kit'
 import { post } from './../../utils/api'
 
 export const submitContactUsForm = async ({
@@ -11,7 +10,7 @@ export const submitContactUsForm = async ({
   origin,
   sid = null
 }: any) => {
-  try {
+  
     let res: any = {}
 
     res = await post(
@@ -28,10 +27,7 @@ export const submitContactUsForm = async ({
     )
 
     return res
-  } catch (err) {
-    const e: any = err
-    error(e.status, e.data.message)
-  }
+  
 }
 
 export const bulkOrderEnquiry = async ({
@@ -46,7 +42,7 @@ export const bulkOrderEnquiry = async ({
   origin,
   sid = null
 }: any) => {
-  try {
+  
     let res: any = {}
 
     res = await post(
@@ -65,7 +61,4 @@ export const bulkOrderEnquiry = async ({
     )
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }

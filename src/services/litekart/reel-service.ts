@@ -1,9 +1,6 @@
-import { error } from '@sveltejs/kit'
 import { del, getAPI, post } from './../../utils/api'
 import { getBySid } from './../../utils/server'
 
-// @ts-ignore
-const isServer = import.meta.env.SSR
 
 export const fetchReels = async ({
   currentPage = 1,
@@ -11,9 +8,10 @@ export const fetchReels = async ({
   q = '',
   sid = null,
   sort = '-updatedAt',
-  storeId
+  storeId,
+  isServer
 }: any) => {
-  try {
+  
     let res = {}
 
     if (isServer) {
@@ -29,13 +27,11 @@ export const fetchReels = async ({
     }
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
+  
 }
 
-export const fetchReel = async ({ id, origin, sid = null, storeId }: any) => {
-  try {
+export const fetchReel = async ({ id, origin, sid = null, storeId, isServer }: any) => {
+  
     let res = {}
 
     if (isServer) {
@@ -45,9 +41,6 @@ export const fetchReel = async ({ id, origin, sid = null, storeId }: any) => {
     }
 
     return res
-  } catch (e) {
-    error(e.status, e.data?.message || e.message)
-  }
 }
 
 export const saveReel = async ({
@@ -59,9 +52,9 @@ export const saveReel = async ({
   product,
   type,
   sid = null,
-  storeId
+  storeId,
 }: any) => {
-  try {
+  
     let res = {}
 
     res = await post(
@@ -80,15 +73,8 @@ export const saveReel = async ({
     )
 
     return res
-  } catch (err) {
-    error(err.status, err.message)
-  }
 }
 
 export const deleteReel = async ({ id, origin, sid = null, storeId }: any) => {
-  try {
-    await del(`reels/${id}?store=${storeId}`, origin)
-  } catch (err) {
-    error(err.status, err.message)
-  }
+  await del(`reels/${id}?store=${storeId}`, origin)
 }

@@ -1,10 +1,5 @@
 // @ts-ignore
-import { loadingDelayed } from '$lib/store'
-// @ts-ignore
 import cookie from 'cookie'
-// import Cookie from 'cookie-universal'
-
-// const cookies = Cookie()
 // @ts-ignore
 let typingTimer: any
 
@@ -103,12 +98,9 @@ const send = async ({
 
   const url = uri.toString()
 
-  startDelayedLoadingIndicator()
-
   // alert(JSON.stringify(url))
   // alert(JSON.stringify(opts))
   const response = await fetch(url, opts)
-  cancelDelayedLoadingIndicator()
   const isJson = response.headers
     .get('content-type')
     ?.includes('application/json')
@@ -153,16 +145,4 @@ export const put = (
   headers?: any
 ) => {
   return send({ method: 'PUT', path, data, origin, headers })
-}
-
-const startDelayedLoadingIndicator = async () => {
-  clearTimeout(typingTimer)
-  typingTimer = setTimeout(() => {
-    loadingDelayed.set(true)
-  }, 5000)
-}
-
-const cancelDelayedLoadingIndicator = async () => {
-  clearTimeout(typingTimer)
-  loadingDelayed.set(false)
 }

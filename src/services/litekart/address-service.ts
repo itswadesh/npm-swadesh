@@ -1,22 +1,23 @@
 import { getAPI } from './../../utils/api'
-import { getBySid, postBySid, delBySid } from './../../utils/server'
+import { postBySid, delBySid } from './../../utils/server'
+
+
 
 export const fetchAddresses = async ({
   origin,
   storeId,
-  isServer,
   isCors = false,
   sid = null
 }) => {
   let res: any = {}
   let preSelectedAddress = ''
   let myAddresses = []
-
-  if (isServer || isCors) {
-    res = await getBySid(`addresses/my?store=${storeId}`, sid)
-  } else {
-    res = await getAPI(`addresses/my?store=${storeId}`, origin)
-  }
+  // if (isServer || isCors) {
+  //   res = await getBySid(`addresses/my?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`addresses/my?store=${storeId}`, origin)
+  // }
+  res = await getAPI(`addresses/my?store=${storeId}`, origin, sid) 
   preSelectedAddress = res?.data[0]?._id
   myAddresses = res?.data || []
 
@@ -30,18 +31,17 @@ export const fetchAddresses = async ({
 export const fetchAddress = async ({
   origin,
   storeId,
-  isServer,
   sid = null,
   id
 }) => {
   let res: any = {}
 
-  if (isServer) {
-    res = await getBySid(`addresses/${id}?store=${storeId}`, sid)
-  } else {
-    res = await getAPI(`addresses/${id}`, origin)
-  }
-
+  // if (isServer) {
+  //   res = await getBySid(`addresses/${id}?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`addresses/${id}`, origin)
+  // }
+  res = await getAPI(`addresses/${id}`, origin,sid)
   return res || {}
 }
 

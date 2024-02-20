@@ -5,17 +5,17 @@ export const fetchCartData = async ({
   cartId = null,
   origin,
   sid = null,
-  isServer,
   storeId
 }) => {
   let res = {}
 
   if (cartId) {
-    if (isServer) {
-      res = await getBySid(`cart?store=${storeId}&cart_id=${cartId}`, sid)
-    } else {
-      res = await getAPI(`cart?store=${storeId}&cart_id=${cartId}`, origin)
-    }
+    // if (isServer) {
+    //   res = await getBySid(`cart?store=${storeId}&cart_id=${cartId}`, sid)
+    // } else {
+    //   res = await getAPI(`cart?store=${storeId}&cart_id=${cartId}`, origin)
+    // }
+    res = await getAPI(`cart?store=${storeId}&cart_id=${cartId}`, origin,sid)
   }
 
   return res || {}
@@ -26,24 +26,27 @@ export const fetchRefreshCart = async ({
   isCors = false,
   origin = null,
   sid = null,
-  isServer,
   storeId
 }) => {
   let res = {}
 
   if (cartId) {
-    if (isServer || isCors) {
-      res = await getBySid(
-        `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
-        sid
-      )
-      // res = await getBySid(`carts/my?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(
-        `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
-        origin
-      )
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(
+    //     `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
+    //     sid
+    //   )
+    //   // res = await getBySid(`carts/my?store=${storeId}`, sid)
+    // } else {
+    //   res = await getAPI(
+    //     `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
+    //     origin
+    //   )
+    // }
+    res = await getAPI(
+          `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
+          origin,sid
+        )
   }
 
   return res || {}

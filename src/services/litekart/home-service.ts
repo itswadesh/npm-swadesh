@@ -4,8 +4,7 @@ export const fetchHome = async ({
   origin,
   pageId = 'home',
   sid = null,
-  storeId,
-  isServer
+  storeId
 }: any) => {
   let categories = {}
   let res: any = {}

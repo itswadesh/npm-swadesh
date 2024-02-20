@@ -28,7 +28,7 @@ import {
 } from './../../config'
 import { fetchInit } from './init-service'
 
-export const getStoreData = async ({ host }: any) => {
+export const getStoreData = async ({ host, origin }: any) => {
   let storeRes: any = {}
 
   let store = {
@@ -96,7 +96,7 @@ export const getStoreData = async ({ host }: any) => {
     whatsappChatButton: {}
   }
 
-  storeRes = await fetchInit({ host })
+  storeRes = await fetchInit({ host, origin })
 
   store = {
     id: storeRes?.storeOne?._id,

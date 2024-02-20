@@ -5,17 +5,17 @@ export const saveScheduleDemo = async ({
   schedule,
   origin,
   sid = null,
-  isServer
 }: any) => {
     let res: any = {}
 
     res = await post(
       `saveScheduleDemo`,
+      origin,
       {
         schedule,
         store: storeId
       },
-      origin
+      sid
     )
 
     return res

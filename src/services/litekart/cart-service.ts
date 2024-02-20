@@ -89,7 +89,6 @@ export const addToCartService = async ({
   vid,
   origin = null,
   sid = null,
-  isServer,
   storeId
 }) => {
     let res = {}
@@ -116,33 +115,33 @@ export const createBackOrder = async ({
   qty,
   origin = null,
   sid = null,
-  isServer,
   storeId
 }) => {
   let res = {}
 
-  if (isServer) {
-    res = await postBySid(
-      `backorder`,
-      {
-        pid,
-        qty,
-        store: storeId
-      },
-      sid
-    )
-  } else {
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `backorder`,
+  //     {
+  //       pid,
+  //       qty,
+  //       store: storeId
+  //     },
+  //     sid
+  //   )
+  // } else {
     res = await post(
       `backorder`,
+      origin,
       {
         id: 'new',
         pid,
         qty,
         store: storeId
       },
-      origin
+      sid
     )
-  }
+  
 
   return res || {}
 }
@@ -158,12 +157,13 @@ export const applyCouponService = async ({
 
   res = await post(
     `coupons/apply?cart_id=${cartId}`,
+    origin,
     {
       cart_id: cartId,
       code,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -195,15 +195,29 @@ export const updateCart = async ({
   shipping_address_id,
   origin = null,
   sid = null,
-  isServer,
   shippingAddress,
   storeId
 }) => {
   let res = {}
 
-  if (isServer) {
-    res = await postBySid(
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `carts/update-cart`,
+  //     {
+  //       billing_address_id,
+  //       billing_address: billingAddress,
+  //       cart_id: cartId,
+  //       selfTakeout,
+  //       shipping_address_id,
+  //       shipping_address: shippingAddress,
+  //       store: storeId
+  //     },
+  //     sid
+  //   )
+  // } else {
+    res = await post(
       `carts/update-cart`,
+      origin,
       {
         billing_address_id,
         billing_address: billingAddress,
@@ -215,21 +229,6 @@ export const updateCart = async ({
       },
       sid
     )
-  } else {
-    res = await post(
-      `carts/update-cart`,
-      {
-        billing_address_id,
-        billing_address: billingAddress,
-        cart_id: cartId,
-        selfTakeout,
-        shipping_address_id,
-        shipping_address: shippingAddress,
-        store: storeId
-      },
-      origin
-    )
-  }
 }
 
 export const updateCart2 = async ({
@@ -237,14 +236,24 @@ export const updateCart2 = async ({
   selected_products_for_checkout,
   origin = null,
   sid = null,
-  isServer,
   storeId
 }) => {
   let res = {}
 
-  if (isServer) {
-    res = await postBySid(
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `carts/update-cart`,
+  //     {
+  //       cart_id: cartId,
+  //       selected_products_for_checkout,
+  //       store: storeId
+  //     },
+  //     sid
+  //   )
+  // } else {
+    res = await post(
       `carts/update-cart`,
+      origin,
       {
         cart_id: cartId,
         selected_products_for_checkout,
@@ -252,17 +261,6 @@ export const updateCart2 = async ({
       },
       sid
     )
-  } else {
-    res = await post(
-      `carts/update-cart`,
-      {
-        cart_id: cartId,
-        selected_products_for_checkout,
-        store: storeId
-      },
-      origin
-    )
-  }
 
   return res || {}
 }
@@ -272,16 +270,28 @@ export const updateCart3 = async ({
   billing_address,
   cartId,
   selfTakeout,
-  isServer,
   origin = null,
   sid = null,
   storeId
 }) => {
   let res = {}
 
-  if (isServer) {
-    res = await postBySid(
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `carts/update-cart`,
+  //     {
+  //       cart_id: cartId,
+  //       selfTakeout,
+  //       shipping_address,
+  //       billing_address,
+  //       store: storeId
+  //     },
+  //     sid
+  //   )
+  // } else {
+    res = await post(
       `carts/update-cart`,
+      origin,
       {
         cart_id: cartId,
         selfTakeout,
@@ -291,19 +301,7 @@ export const updateCart3 = async ({
       },
       sid
     )
-  } else {
-    res = await post(
-      `carts/update-cart`,
-      {
-        cart_id: cartId,
-        selfTakeout,
-        shipping_address,
-        billing_address,
-        store: storeId
-      },
-      origin
-    )
-  }
+  
 
   return res || {}
 }

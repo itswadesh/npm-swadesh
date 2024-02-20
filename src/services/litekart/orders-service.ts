@@ -92,34 +92,34 @@ export const paySuccessPageHit = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
   let res = {}
 
-  if (isServer) {
-    res = await postBySid(
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `orders/pay-success-page-hit`,
+  //     {
+  //       orderId,
+  //       paymentMode,
+  //       paymentReferenceId,
+  //       status,
+  //       store: storeId
+  //     },
+  //     sid
+  //   )
+  // } else {
+    res = await post(
       `orders/pay-success-page-hit`,
+      origin,
       {
         orderId,
         paymentMode,
-        paymentReferenceId,
         status,
         store: storeId
       },
       sid
     )
-  } else {
-    res = await post(
-      `orders/pay-success-page-hit`,
-      {
-        orderId,
-        paymentMode,
-        status,
-        store: storeId
-      },
-      origin
-    )
-  }
+  
 
   return res || {}
 }
@@ -138,6 +138,7 @@ export const codCheckout = async ({
 
   res = await post(
     `orders/checkout/cod?cart_id=${cartId}`,
+    origin,
     {
       address,
       cart_id: cartId,
@@ -146,7 +147,7 @@ export const codCheckout = async ({
       prescription,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -158,12 +159,14 @@ export const phonepeCheckout = async ({
   orderNo,
   prescription = '',
   storeId,
-  cartId
+  cartId,
+  sid = null
 }) => {
   let res = {}
 
   res = await post(
     `checkout/phonepe`,
+    origin,
     {
       address,
       cart_id: cartId,
@@ -173,7 +176,7 @@ export const phonepeCheckout = async ({
       return_url: `${origin}/payment/success`,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -185,12 +188,14 @@ export const cashfreeCheckout = async ({
   prescription = '',
   origin,
   cartId,
-  storeId
+  storeId,
+  sid= null
 }) => {
   let res = {}
 
   res = await post(
     `checkout/cashfree`,
+    origin,
     {
       address,
       cart_id: cartId,
@@ -200,7 +205,7 @@ export const cashfreeCheckout = async ({
       return_url: `${origin}/payment/process-cf`,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -228,12 +233,14 @@ export const razorpayCheckout = async ({
   cartId,
   prescription = '',
   origin,
-  storeId
+  storeId,
+  sid = null
 }) => {
   let res = {}
 
   res = await post(
     `checkout/razorpay`,
+    origin,
     {
       address,
       cart_id: cartId,
@@ -244,7 +251,7 @@ export const razorpayCheckout = async ({
       store: storeId,
       paymentMethod: 'Razorpay'
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -254,12 +261,14 @@ export const razorpayCapture = async ({
   rpOrderId,
   rpPaymentId,
   origin,
-  storeId
+  storeId,
+  sid=null
 }) => {
   let res = {}
 
   res = await post(
     `checkout/razorpay-capture`,
+    origin,
     {
       domain: origin,
       return_url: `${origin}/payment/process`,
@@ -267,7 +276,7 @@ export const razorpayCapture = async ({
       rpPaymentId,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -285,13 +294,14 @@ export const stripeCheckoutService = async ({
 
   res = await post(
     `checkout/stripe`,
+    origin,
     {
       address,
       paymentMethodId,
       cart_id: cartId,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res || {}
@@ -302,12 +312,14 @@ export const paypalCheckout = async ({
   orderNo,
   cartId,
   origin,
-  storeId
+  storeId,
+  sid=null
 }) => {
   let res = {}
 
   res = await post(
     `checkout/paypal`,
+    origin,
     {
       address,
       cart_id: cartId,
@@ -317,7 +329,7 @@ export const paypalCheckout = async ({
       store: storeId,
       paymentMethod: 'Paypal'
     },
-    origin
+    sid
   )
 
   return res || {}

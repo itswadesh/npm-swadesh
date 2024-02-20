@@ -11,13 +11,14 @@ export const savePopularSearch = async ({
 
   res = await post(
     `popular-search`,
+    origin,
     {
       id,
       text,
       // popularity: 0,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res

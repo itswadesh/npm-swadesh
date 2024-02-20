@@ -14,6 +14,7 @@ export const submitContactUsForm = async ({
 
     res = await post(
       `contact-us`,
+      origin,
       {
         fullName,
         email,
@@ -22,7 +23,7 @@ export const submitContactUsForm = async ({
         message,
         store: storeId
       },
-      origin
+      sid
     )
 
     return res
@@ -45,6 +46,7 @@ export const bulkOrderEnquiry = async ({
 
     res = await post(
       `bulk-order-enquiry`,
+      origin,
       {
         name,
         companayName,
@@ -55,7 +57,7 @@ export const bulkOrderEnquiry = async ({
         message,
         store: storeId
       },
-      origin
+      sid
     )
 
     return res

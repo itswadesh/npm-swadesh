@@ -1,5 +1,5 @@
 import { getAPI, post } from './../../utils/api'
-import { getBySid, postBySid } from './../../utils/server'
+import {  postBySid } from './../../utils/server'
 
 export const moveUnavailableItemsToWishlist = async ({
   origin,
@@ -7,7 +7,6 @@ export const moveUnavailableItemsToWishlist = async ({
   sid = null,
   isServer
 }) => {
-  
     let res: any = {}
 
     if (isServer) {
@@ -34,22 +33,25 @@ export const fetchWishlist = async ({
   sort = '-createdAt',
   currentPage = 1,
   sid = null,
-  isServer
 }) => {
-  
     let res: any = {}
 
-    if (isServer && sid != null) {
-      res = await getBySid(
-        `wishlists/my?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `wishlists/my?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
-        origin
-      )
-    }
+    // if (isServer && sid != null) {
+    //   res = await getBySid(
+    //     `wishlists/my?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
+    //     sid
+    //   )
+    // } else {
+    //   res = await getAPI(
+    //     `wishlists/my?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
+    //     origin
+    //   )
+    // }
+
+    res = await getAPI(
+      `wishlists/my?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
+      origin, sid
+    )
 
     return res || []
 }
@@ -61,24 +63,26 @@ export const checkWishlist = async ({
   vid,
   isCors = false,
   sid = null,
-  isServer
 }) => {
-  // if (!sid) return false
-
-  
+    // if (!sid) return false
     let res: any = {}
 
-    if (isServer) {
-      res = await getBySid(
-        `wishlists/check?product=${pid}&variant=${vid}&store=${storeId}`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `wishlists/check?product=${pid}&variant=${vid}&store=${storeId}`,
-        origin
-      )
-    }
+    // if (isServer) {
+    //   res = await getBySid(
+    //     `wishlists/check?product=${pid}&variant=${vid}&store=${storeId}`,
+    //     sid
+    //   )
+    // } else {
+    //   res = await getAPI(
+    //     `wishlists/check?product=${pid}&variant=${vid}&store=${storeId}`,
+    //     origin
+    //   )
+    // }
+
+    res = await getAPI(
+      `wishlists/check?product=${pid}&variant=${vid}&store=${storeId}`,
+      origin, sid
+    )
 
     return res
 }
@@ -92,7 +96,6 @@ export const toggleWishlistService = async ({
   storeId,
   isServer
 }) => {
-  
     let res: any = {}
 
     if (isServer || isCors) {

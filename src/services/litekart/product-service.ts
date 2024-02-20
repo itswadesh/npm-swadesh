@@ -6,16 +6,17 @@ export const fetchProducts = async ({
   origin,
   isCors = false,
   sid = null,
-  isServer = true,
   storeId
 }: any) => {
   let res: any = {}
 
-  if (isServer || isCors) {
-    res = await getBySid(`es/products?store=${storeId}&${query}`, sid)
-  } else {
-    res = await getAPI(`es/products?store=${storeId}&${query}`, origin)
-  }
+  // if (isServer || isCors) {
+  //   res = await getBySid(`es/products?store=${storeId}&${query}`, sid)
+  // } else {
+  //   res = await getAPI(`es/products?store=${storeId}&${query}`, origin)
+  // }
+
+  res = await getAPI(`es/products?store=${storeId}&${query}`, origin, sid)
 
   return res?.data || []
 }
@@ -23,19 +24,22 @@ export const fetchProducts = async ({
 export const fetchReels = async ({
   origin,
   storeId,
-  isServer,
   sid = null
 }: any) => {
   let res: any = {}
 
-  if (isServer) {
-    res = await getBySid(`reels?store=${storeId}`, sid)
-  } else {
-    res = await getAPI(`reels?store=${storeId}`, origin)
-  }
+  // if (isServer) {
+  //   res = await getBySid(`reels?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`reels?store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`reels?store=${storeId}`, origin, sid)
+
   res.data = res.data.map((d) => {
     return { ...d, muted: false }
   })
+
   return res || {}
 }
 
@@ -45,18 +49,20 @@ export const fetchProduct = async ({
   origin,
   slug,
   id,
-  isServer,
   storeId,
   isCors = false,
   sid
 }) => {
   let res: object = {}
 
-  if (isServer || isCors) {
-    res = await getBySid(`es/products/${slug || id}?store=${storeId}`, sid)
-  } else {
-    res = await getAPI(`es/products/${slug || id}?store=${storeId}`, origin)
-  }
+  // if (isServer || isCors) {
+  //   res = await getBySid(`es/products/${slug || id}?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`es/products/${slug || id}?store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`es/products/${slug || id}?store=${storeId}`, origin, sid)
+
   return res || {}
 }
 
@@ -65,17 +71,20 @@ export const fetchProduct = async ({
 export const fetchProduct2 = async ({
   origin,
   slug,
-  isServer,
   storeId,
   id,
   sid = null
 }) => {
   let res: object = {}
-  if (isServer) {
-    res = await getBySid(`es/products2/${slug || id}?store=${storeId}`, sid)
-  } else {
-    res = await getAPI(`es/products2/${slug || id}?store=${storeId}`, origin)
-  }
+
+  // if (isServer) {
+  //   res = await getBySid(`es/products2/${slug || id}?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`es/products2/${slug || id}?store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`es/products2/${slug || id}?store=${storeId}`, origin, sid)
+
   return res || {}
 }
 
@@ -85,7 +94,6 @@ export const fetchProductsOfCategory = async ({
   categorySlug,
   origin,
   query,
-  isServer,
   sid = null,
   storeId,
   zip = null
@@ -98,17 +106,22 @@ export const fetchProductsOfCategory = async ({
   let category = {}
   let err = ''
 
-  if (isServer) {
-    res = await getBySid(
-      `es/products?categories=${categorySlug}&zip=${zip || ''}&store=${storeId}&${query}`,
-      sid
-    )
-  } else {
-    res = await getAPI(
-      `es/products?categories=${categorySlug}&zip=${zip || ''}&store=${storeId}&${query}`,
-      origin
-    )
-  }
+  // if (isServer) {
+  //   res = await getBySid(
+  //     `es/products?categories=${categorySlug}&zip=${zip || ''}&store=${storeId}&${query}`,
+  //     sid
+  //   )
+  // } else {
+  //   res = await getAPI(
+  //     `es/products?categories=${categorySlug}&zip=${zip || ''}&store=${storeId}&${query}`,
+  //     origin
+  //   )
+  // }
+  
+  res = await getAPI(
+    `es/products?categories=${categorySlug}&zip=${zip || ''}&store=${storeId}&${query}`,
+    origin, sid
+  )
 
   products = res?.data?.map((p) => {
     if (p._source) {
@@ -119,6 +132,7 @@ export const fetchProductsOfCategory = async ({
       return p
     }
   })
+
   count = res?.count
   facets = res?.facets
   pageSize = res?.pageSize
@@ -133,7 +147,6 @@ export const fetchNextPageProducts = async ({
   isCors = false,
   origin,
   storeId,
-  isServer,
   categorySlug,
   nextPage,
   searchParams = {},
@@ -142,17 +155,22 @@ export const fetchNextPageProducts = async ({
   let nextPageData = []
   let res: any = {}
 
-  if (isServer || isCors) {
-    res = await getBySid(
-      `es/products?categories=${categorySlug}&store=${storeId}&page=${nextPage}&${searchParams}`,
-      sid
-    )
-  } else {
-    res = await getAPI(
-      `es/products?categories=${categorySlug}&store=${storeId}&page=${nextPage}&${searchParams}`,
-      origin
-    )
-  }
+  // if (isServer || isCors) {
+  //   res = await getBySid(
+  //     `es/products?categories=${categorySlug}&store=${storeId}&page=${nextPage}&${searchParams}`,
+  //     sid
+  //   )
+  // } else {
+  //   res = await getAPI(
+  //     `es/products?categories=${categorySlug}&store=${storeId}&page=${nextPage}&${searchParams}`,
+  //     origin
+  //   )
+  // }
+
+  res = await getAPI(
+    `es/products?categories=${categorySlug}&store=${storeId}&page=${nextPage}&${searchParams}`,
+    origin, sid
+  )
 
   nextPageData = res?.data?.map((p) => {
     if (p._source) {
@@ -179,24 +197,28 @@ export const fetchRelatedProducts = async ({
   isCors = false,
   origin,
   storeId,
-  isServer,
   categorySlug,
   pid,
   sid = null
 }) => {
   let relatedProductsRes: any = {}
 
-  if (isServer || isCors) {
-    relatedProductsRes = await getBySid(
-      `es/products?categories=${categorySlug}&store=${storeId}`,
-      sid
-    )
-  } else {
-    relatedProductsRes = await getAPI(
-      `es/products?categories=${categorySlug}&store=${storeId}`,
-      origin
-    )
-  }
+  // if (isServer || isCors) {
+  //   relatedProductsRes = await getBySid(
+  //     `es/products?categories=${categorySlug}&store=${storeId}`,
+  //     sid
+  //   )
+  // } else {
+  //   relatedProductsRes = await getAPI(
+  //     `es/products?categories=${categorySlug}&store=${storeId}`,
+  //     origin
+  //   )
+  // }
+
+  relatedProductsRes = await getAPI(
+    `es/products?categories=${categorySlug}&store=${storeId}`,
+    origin, sid
+  )
 
   const relatedProducts = relatedProductsRes?.data.filter((p) => {
     return p._id !== pid

@@ -1,5 +1,5 @@
 import { getAPI } from './../../utils/api'
-import { getBySid } from './../../utils/server'
+
 
 export const fetchDeals = async ({
   isCors = false,
@@ -7,16 +7,16 @@ export const fetchDeals = async ({
   query,
   storeId,
   sid = null,
-  isServer
 }: any) => {
-  
     let res: any = {}
 
-    if (isServer || isCors) {
-      res = await getBySid(`deals?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`deals?store=${storeId}`, origin)
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(`deals?store=${storeId}`, sid)
+    // } else {
+    //   res = await getAPI(`deals?store=${storeId}`, origin)
+    // }
+
+    res = await getAPI(`deals?store=${storeId}`, origin, sid)
 
     return res || {}
 }

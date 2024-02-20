@@ -1,6 +1,4 @@
 import { getAPI } from './../../utils/api'
-import { getBySid } from './../../utils/server'
-
 
 export const fetchFooterCategories = async ({
   isCors = false,
@@ -8,22 +6,25 @@ export const fetchFooterCategories = async ({
   megamenu = false,
   sid = null,
   storeId,
-  isServer
 }) => {
- 
     let data: []
 
-    if (isServer || isCors) {
-      data = await getBySid(
-        `categories?megamenu=${megamenu}&limit=6&page=0&level=0&store=${storeId}`,
-        sid
-      )
-    } else {
-      data = await getAPI(
-        `categories?megamenu=${megamenu}&limit=6&page=0&level=0&store=${storeId}`,
-        origin
-      )
-    }
+    // if (isServer || isCors) {
+    //   data = await getBySid(
+    //     `categories?megamenu=${megamenu}&limit=6&page=0&level=0&store=${storeId}`,
+    //     sid
+    //   )
+    // } else {
+    //   data = await getAPI(
+    //     `categories?megamenu=${megamenu}&limit=6&page=0&level=0&store=${storeId}`,
+    //     origin
+    //   )
+    // }
+
+  data = await getAPI(
+    `categories?megamenu=${megamenu}&limit=6&page=0&level=0&store=${storeId}`,
+    origin, sid
+  )
 
     return data || []
 }
@@ -35,22 +36,26 @@ export const fetchCategory = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
   
     let res = {}
 
-    if (isServer || isCors) {
-      res = await getBySid(
-        `es/categories/${id}?store=${storeId}&children=${children}`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `es/categories/${id}?store=${storeId}&children=${children}`,
-        origin
-      )
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(
+    //     `es/categories/${id}?store=${storeId}&children=${children}`,
+    //     sid
+    //   )
+    // } else {
+    //   res = await getAPI(
+    //     `es/categories/${id}?store=${storeId}&children=${children}`,
+    //     origin
+    //   )
+    // }
+
+    res = await getAPI(
+      `es/categories/${id}?store=${storeId}&children=${children}`,
+      origin, sid
+    )
 
     return res || {}
  
@@ -63,9 +68,7 @@ export const fetchAllCategories = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
-  
     let res: any = {}
 
     let catQ = `categories?store=${storeId}&page=0&limit=${limit || '1000'}`
@@ -74,11 +77,14 @@ export const fetchAllCategories = async ({
       catQ += '&featured=true'
     }
 
-    if (isServer || isCors) {
-      res = await getBySid(catQ, sid)
-    } else {
-      res = await getAPI(catQ, origin)
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(catQ, sid)
+    // } else {
+    //   res = await getAPI(catQ, origin)
+    // }
+    
+    res = await getAPI(catQ, origin, sid)
+
     const currentPage = res.currentPage
     const data = res.data
     const pageSize = res.pageSize
@@ -92,9 +98,7 @@ export const fetchAllProductsOfCategories = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
-  
     let res: any = {}
     let products = []
     let productsCount = 0
@@ -103,16 +107,21 @@ export const fetchAllProductsOfCategories = async ({
     let err = null
 
     let catQ = `categories?store=${storeId}`
+
     if (featured) {
       catQ += '&featured=true'
     }
 
-    if (isServer || isCors) {
-      res = await getBySid(catQ, sid)
-    } else {
-      res = await getAPI(catQ, origin)
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(catQ, sid)
+    // } else {
+    //   res = await getAPI(catQ, origin)
+    // }
+
+    res = await getAPI(catQ, origin, sid)
+
     // must return link:string, slug:string(optional) name:string, new:boolean
+
     currentPage = res?.page
     err = !products ? 'No result Not Found' : null
     facets = res?.facets?.all_aggs
@@ -120,7 +129,6 @@ export const fetchAllProductsOfCategories = async ({
     productsCount = res?.count
 
     return { products, productsCount, currentPage, facets, err }
-  
 }
 
 export const fetchMegamenuData = async ({
@@ -129,22 +137,25 @@ export const fetchMegamenuData = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
-  
     let data: []
 
-    if (isServer || isCors) {
-      data = await getBySid(
-        `categories/megamenu?megamenu=${megamenu}&store=${storeId}&active=true`,
-        sid
-      )
-    } else {
-      data = await getAPI(
-        `categories/megamenu?megamenu=${megamenu}&store=${storeId}&active=true`,
-        origin
-      )
-    }
+    // if (isServer || isCors) {
+    //   data = await getBySid(
+    //     `categories/megamenu?megamenu=${megamenu}&store=${storeId}&active=true`,
+    //     sid
+    //   )
+    // } else {
+    //   data = await getAPI(
+    //     `categories/megamenu?megamenu=${megamenu}&store=${storeId}&active=true`,
+    //     origin
+    //   )
+    // }
+
+    data = await getAPI(
+      `categories/megamenu?megamenu=${megamenu}&store=${storeId}&active=true`,
+      origin, sid
+    )
 
     return data || []
 }

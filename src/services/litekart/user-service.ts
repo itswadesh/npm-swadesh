@@ -1,5 +1,5 @@
 import { getAPI, post, put } from './../../utils/api'
-import { getBySid, postBySid } from './../../utils/server'
+import {  postBySid } from './../../utils/server'
 
 
 export const fetchMeData = async ({
@@ -7,16 +7,16 @@ export const fetchMeData = async ({
   origin,
   storeId,
   sid = null,
-  isServer
 }: any) => {
- 
     let res: any = {}
 
-    if (isServer || isCors) {
-      res = await getBySid(`users/me?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`users/me?store=${storeId}`, origin)
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(`users/me?store=${storeId}`, sid)
+    // } else {
+    //   res = await getAPI(`users/me?store=${storeId}`, origin)
+    // }
+
+    res = await getAPI(`users/me?store=${storeId}`, origin, sid)
 
     return res || {}
 }
@@ -49,7 +49,6 @@ export const signupService = async ({
     )
 
     return res
-  
 }
 
 export const googleOneTapLoginService = async ({
@@ -63,7 +62,6 @@ export const googleOneTapLoginService = async ({
     res = await post(`auth/google/onetap`, data, origin)
 
     return res
- 
 }
 
 export const loginService = async ({
@@ -119,7 +117,6 @@ export const resetPasswordService = async ({
   origin,
   sid = null
 }: any) => {
-  
     let res: any = {}
 
     res = await post(
@@ -136,6 +133,7 @@ export const resetPasswordService = async ({
 
     return res
 }
+
 export const changePasswordService = async ({
   oldPassword,
   password,
@@ -144,7 +142,6 @@ export const changePasswordService = async ({
   origin,
   sid = null
 }: any) => {
-  
     let res: any = {}
 
     res = await post(
@@ -172,7 +169,6 @@ export const getOtpService = async ({
   origin,
   sid = null
 }: any) => {
-  
     let res: any = {}
 
     res = await post(
@@ -193,7 +189,6 @@ export const verifyOtpService = async ({
   storeId,
   origin
 }: any) => {
- 
     let res: any = {}
 
     res = await post(
@@ -210,7 +205,6 @@ export const verifyOtpService = async ({
 }
 
 export const logoutService = async ({ storeId, origin, sid = null }: any) => {
-  
     let res: any = {}
 
     res = await postBySid(`logout?store=${storeId}`, {}, sid)
@@ -224,7 +218,6 @@ export const updateProfileService = async ({
   origin,
   sid = null
 }: any) => {
- 
     let res: any = {}
 
     res = await put(`users/update-profile`, e, origin)
@@ -242,7 +235,6 @@ export const verifyEmail = async ({
   storeId,
   isServer
 }) => {
- 
     let res = {}
 
     if (isServer) {

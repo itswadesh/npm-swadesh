@@ -1,6 +1,4 @@
 import { getAPI } from './../../utils/api'
-import { getBySid } from './../../utils/server'
-
 
 
 export const fetchHome = async ({
@@ -11,15 +9,16 @@ export const fetchHome = async ({
   storeId,
   isServer
 }: any) => {
-  
     let categories = {}
     let res: any = {}
 
-    if (isServer || isCors) {
-      res = await getBySid(`home?store=${storeId}&pageId=${pageId}`, sid)
-    } else {
-      res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin)
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(`home?store=${storeId}&pageId=${pageId}`, sid)
+    // } else {
+    //   res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin)
+    // }
+
+    res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin, sid)
 
     if (res?.categories?.data?.length) {
       categories = res?.categories?.data
@@ -40,21 +39,25 @@ export const fetchCategoriesProducts = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
   let categoriesProducts
 
-  if (isServer) {
-    categoriesProducts = await getBySid(
-      `es/products?categories=${categories}&sort=-updatedAt&limit=20&store=${storeId}`,
-      sid
-    )
-  } else {
-    categoriesProducts = await getAPI(
-      `es/products?categories=${categories}&sort=-updatedAt&limit=20&store=${storeId}`,
-      origin
-    )
-  }
+  // if (isServer) {
+  //   categoriesProducts = await getBySid(
+  //     `es/products?categories=${categories}&sort=-updatedAt&limit=20&store=${storeId}`,
+  //     sid
+  //   )
+  // } else {
+  //   categoriesProducts = await getAPI(
+  //     `es/products?categories=${categories}&sort=-updatedAt&limit=20&store=${storeId}`,
+  //     origin
+  //   )
+  // }
+
+  categoriesProducts = await getAPI(
+    `es/products?categories=${categories}&sort=-updatedAt&limit=20&store=${storeId}`,
+    origin, sid
+  )
 
   return categoriesProducts
 }

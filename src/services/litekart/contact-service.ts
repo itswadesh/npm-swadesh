@@ -10,7 +10,6 @@ export const submitContactUsForm = async ({
   origin,
   sid = null
 }: any) => {
-  
     let res: any = {}
 
     res = await post(
@@ -42,7 +41,6 @@ export const bulkOrderEnquiry = async ({
   origin,
   sid = null
 }: any) => {
-  
     let res: any = {}
 
     res = await post(

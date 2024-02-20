@@ -19,6 +19,7 @@ export const fetchBanners = async ({
   //     origin
   //   )
   // }
+
   res = await getAPI(
     `banners?pageId=${pageId}&store=${storeId}&active=true`,
     origin,sid
@@ -47,6 +48,7 @@ export const fetchBannersGroup = async ({
   //     origin
   //   )
   // }
+  
   res = await getAPI(
     `banners?pageId=${pageId}&store=${storeId}&active=true`,
     origin,sid

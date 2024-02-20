@@ -1,5 +1,5 @@
 import { del, getAPI, post } from './../../utils/api'
-import { getBySid } from './../../utils/server'
+
 
 
 export const fetchReels = async ({
@@ -9,36 +9,39 @@ export const fetchReels = async ({
   sid = null,
   sort = '-updatedAt',
   storeId,
-  isServer
 }: any) => {
-  
     let res = {}
 
-    if (isServer) {
-      res = await getBySid(
-        `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
-        origin
-      )
-    }
+    // if (isServer) {
+    //   res = await getBySid(
+    //     `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
+    //     sid
+    //   )
+    // } else {
+    //   res = await getAPI(
+    //     `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
+    //     origin
+    //   )
+    // }
+
+    res = await getAPI(
+      `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
+      origin, sid
+    )
 
     return res
-  
 }
 
 export const fetchReel = async ({ id, origin, sid = null, storeId, isServer }: any) => {
-  
     let res = {}
 
-    if (isServer) {
-      res = await getBySid(`reels/${id}?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`reels/${id}?store=${storeId}`, origin)
-    }
+    // if (isServer) {
+    //   res = await getBySid(`reels/${id}?store=${storeId}`, sid)
+    // } else {
+    //   res = await getAPI(`reels/${id}?store=${storeId}`, origin)
+    // }
+
+    res = await getAPI(`reels/${id}?store=${storeId}`, origin, sid)
 
     return res
 }
@@ -53,8 +56,7 @@ export const saveReel = async ({
   type,
   sid = null,
   storeId,
-}: any) => {
-  
+}: any) => {  
     let res = {}
 
     res = await post(

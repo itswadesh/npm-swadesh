@@ -1,5 +1,4 @@
 import { getAPI, post } from './../../utils/api'
-import { getBySid } from './../../utils/server'
 
 
 export const fetchReviews = async ({
@@ -8,24 +7,27 @@ export const fetchReviews = async ({
   storeId,
   search,
   sort,
-  isServer,
   currentPage,
   sid = null
 }: any) => {
-  
     let res: any = {}
 
-    if (isServer || isCors) {
-      res = await getBySid(
-        `es/reviews?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `es/reviews?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
-        origin
-      )
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(
+    //     `es/reviews?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
+    //     sid
+    //   )
+    // } else {
+    //   res = await getAPI(
+    //     `es/reviews?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
+    //     origin
+    //   )
+    // }
+
+    res = await getAPI(
+      `es/reviews?search=${search || ''}&sort=${sort}&page=${currentPage}&store=${storeId}`,
+      origin, sid
+    )
 
     return {
       data: res.data || [],
@@ -45,24 +47,27 @@ export const fetchProductReviews = async ({
   slug,
   sid = null,
   storeId,
-  isServer
 }: any) => {
-  
     let productReviewsRes: any = {}
     // : ProductReviews[]
     let productReviews = []
 
-    if (isServer || isCors) {
-      productReviewsRes = await getBySid(
-        `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
-        sid
-      )
-    } else {
-      productReviewsRes = await getAPI(
-        `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
-        origin
-      )
-    }
+    // if (isServer || isCors) {
+    //   productReviewsRes = await getBySid(
+    //     `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
+    //     sid
+    //   )
+    // } else {
+    //   productReviewsRes = await getAPI(
+    //     `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
+    //     origin
+    //   )
+    // }
+
+    productReviewsRes = await getAPI(
+      `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
+      origin, sid
+    )
 
     productReviews = productReviewsRes
 

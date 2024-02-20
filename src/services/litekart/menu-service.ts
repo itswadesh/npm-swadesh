@@ -1,5 +1,4 @@
 import { getAPI } from './../../utils/api'
-import { getBySid } from './../../utils/server'
 
 
 export const fetchMenuData = async ({
@@ -7,16 +6,16 @@ export const fetchMenuData = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
-  
     let data: any = []
 
-    if (isServer || isCors) {
-      data = await getBySid(`menus?active=true&store=${storeId}`, sid)
-    } else {
-      data = await getAPI(`menus?active=true&store=${storeId}`, origin)
-    }
+    // if (isServer || isCors) {
+    //   data = await getBySid(`menus?active=true&store=${storeId}`, sid)
+    // } else {
+    //   data = await getAPI(`menus?active=true&store=${storeId}`, origin)
+    // }
+
+    data = await getAPI(`menus?active=true&store=${storeId}`, origin, sid)
 
     return data.data || []
 

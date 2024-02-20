@@ -7,7 +7,6 @@ export const saveScheduleDemo = async ({
   sid = null,
   isServer
 }: any) => {
- 
     let res: any = {}
 
     res = await post(

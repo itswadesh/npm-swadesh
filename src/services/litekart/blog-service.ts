@@ -16,10 +16,12 @@ export const fetchBlogs = async ({
   //     origin
   //   )
   // }
+
   res = await getAPI(
         `blogs?store=${storeId}&${query}&sort=-updatedAt`,
         origin,sid
       )
+
   return res || {}
 }
 
@@ -38,10 +40,12 @@ export const fetchLatestBlogs = async ({
   //     origin
   //   )
   // }
+
   res = await getAPI(
         `blogs?sort=-updatedAt&limit=10&store=${storeId}`,
         origin,sid
       )
+
   return res.data || []
 }
 
@@ -58,6 +62,8 @@ export const fetchBlog = async ({
   // } else {
   //   res = await getAPI(`blogs/${slug}?store=${storeId}`, origin)
   // }
+
   res = await getAPI(`blogs/${slug}?store=${storeId}`, origin,sid)
+  
   return res || {}
 }

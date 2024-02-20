@@ -9,7 +9,6 @@ export const updatePopulatiry = async ({
   sid = null,
   isServer
 }: any) => {
-  
     let res: any | {}
 
     if (isServer || isCors) {

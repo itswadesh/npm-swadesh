@@ -12,6 +12,8 @@ export const fetchBrands = async ({
   // } else {
   //   res = await getAPI(`brands?store=${storeId}`, origin)
   // }
+
   res = await getAPI(`brands?store=${storeId}`, origin,sid)
+  
   return res.data || []
 }

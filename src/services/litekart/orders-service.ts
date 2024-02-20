@@ -1,21 +1,21 @@
 import { getAPI, post } from './../../utils/api'
-import { getBySid, postBySid } from './../../utils/server'
+import {  postBySid } from './../../utils/server'
 
 export const fetchOrders = async ({
   isCors = false,
   origin = null,
   sid = null,
   storeId,
-  isServer
 }) => {
-  
     let res: any = {}
 
-    if (isServer || isCors) {
-      res = await getBySid(`orders/my?store=${storeId}&active=true`, sid)
-    } else {
-      res = await getAPI(`orders/my?store=${storeId}&active=true`, origin)
-    }
+    // if (isServer || isCors) {
+    //   res = await getBySid(`orders/my?store=${storeId}&active=true`, sid)
+    // } else {
+    //   res = await getAPI(`orders/my?store=${storeId}&active=true`, origin)
+    // }
+
+    res = await getAPI(`orders/my?store=${storeId}&active=true`, origin, sid)
 
     return {
       count: res.count,
@@ -24,7 +24,6 @@ export const fetchOrders = async ({
       page: res.page,
       pageSize: res.pageSize
     }
-  
 }
 
 export const fetchOrder = async ({
@@ -32,30 +31,30 @@ export const fetchOrder = async ({
   sid = null,
   storeId,
   id,
-  isServer
 }) => {
-  
     let res = {}
 
-    if (isServer) {
-      res = await getBySid(`orders/${id}?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`orders/${id}?store=${storeId}`, origin)
-    }
+    // if (isServer) {
+    //   res = await getBySid(`orders/${id}?store=${storeId}`, sid)
+    // } else {
+    //   res = await getAPI(`orders/${id}?store=${storeId}`, origin)
+    // }
+
+    res = await getAPI(`orders/${id}?store=${storeId}`, origin, sid)
 
     return res || {}
-  
 }
 
-export const fetchTrackOrder = async ({ id, origin, sid = null, storeId,isServer }) => {
-  
+export const fetchTrackOrder = async ({ id, origin, sid = null, storeId }) => {
     let res = {}
 
-    if (isServer) {
-      res = await getBySid(`order-tracking/${id}?store=${storeId}`, sid)
-    } else {
-      res = await getAPI(`order-tracking/${id}?store=${storeId}`, origin)
-    }
+    // if (isServer) {
+    //   res = await getBySid(`order-tracking/${id}?store=${storeId}`, sid)
+    // } else {
+    //   res = await getAPI(`order-tracking/${id}?store=${storeId}`, origin)
+    // }
+
+    res = await getAPI(`order-tracking/${id}?store=${storeId}`, origin, sid)
 
     return res || []
   
@@ -67,24 +66,27 @@ export const getOrder = async ({
   origin,
   sid = null,
   storeId,
-  isServer
 }) => {
-  
     let res = {}
 
-    if (isServer) {
-      res = await getBySid(
-        `orders-public?order_no=${orderNo}&store=${storeId}&cart_id=${cartId}`,
-        sid
-      )
-    } else {
-      res = await getAPI(
-        `orders-public?order_no=${orderNo}&store=${storeId}&cart_id=${cartId}`,
-        origin
-      )
-    }
+    // if (isServer) {
+    //   res = await getBySid(
+    //     `orders-public?order_no=${orderNo}&store=${storeId}&cart_id=${cartId}`,
+    //     sid
+    //   )
+    // } else {
+    //   res = await getAPI(
+    //     `orders-public?order_no=${orderNo}&store=${storeId}&cart_id=${cartId}`,
+    //     origin
+    //   )
+    // }
+
+    res = await getAPI(
+      `orders-public?order_no=${orderNo}&store=${storeId}&cart_id=${cartId}`,
+      origin, sid
+    )
+
     return res || {}
-  
 }
 
 export const paySuccessPageHit = async ({
@@ -97,7 +99,6 @@ export const paySuccessPageHit = async ({
   storeId,
   isServer
 }) => {
-  
     let res = {}
 
     if (isServer) {
@@ -138,7 +139,6 @@ export const codCheckout = async ({
   sid = null,
   storeId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -155,7 +155,6 @@ export const codCheckout = async ({
     )
 
     return res || {}
-  
 }
 
 export const phonepeCheckout = async ({
@@ -166,7 +165,6 @@ export const phonepeCheckout = async ({
   storeId,
   cartId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -184,8 +182,8 @@ export const phonepeCheckout = async ({
     )
 
     return res || {}
-  
 }
+
 export const cashfreeCheckout = async ({
   address,
   orderNo,
@@ -194,7 +192,6 @@ export const cashfreeCheckout = async ({
   cartId,
   storeId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -210,12 +207,11 @@ export const cashfreeCheckout = async ({
       },
       origin
     )
+
     return res || {}
-  
 }
 
 export const cashfreeCapture = async ({ order_no, origin, sid, storeId }) => {
-  
     let res = {}
 
     res = await postBySid(
@@ -229,7 +225,6 @@ export const cashfreeCapture = async ({ order_no, origin, sid, storeId }) => {
     )
 
     return res || {}
-  
 }
 
 export const razorpayCheckout = async ({
@@ -240,7 +235,6 @@ export const razorpayCheckout = async ({
   origin,
   storeId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -259,7 +253,6 @@ export const razorpayCheckout = async ({
     )
 
     return res || {}
-  
 }
 
 export const razorpayCapture = async ({
@@ -268,7 +261,6 @@ export const razorpayCapture = async ({
   origin,
   storeId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -284,7 +276,6 @@ export const razorpayCapture = async ({
     )
 
     return res || {}
-  
 }
 
 export const stripeCheckoutService = async ({
@@ -295,7 +286,6 @@ export const stripeCheckoutService = async ({
   sid = null,
   storeId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -308,8 +298,8 @@ export const stripeCheckoutService = async ({
       },
       origin
     )
+
     return res || {}
-  
 }
 
 export const paypalCheckout = async ({
@@ -319,7 +309,6 @@ export const paypalCheckout = async ({
   origin,
   storeId
 }) => {
-  
     let res = {}
 
     res = await post(
@@ -337,5 +326,4 @@ export const paypalCheckout = async ({
     )
 
     return res || {}
-  
 }

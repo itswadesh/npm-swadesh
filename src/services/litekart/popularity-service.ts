@@ -1,20 +1,18 @@
 import { post } from './../../utils/api'
-import { postBySid } from './../../utils/server'
 
 export const updatePopulatiry = async ({
   pid,
   storeId,
   origin,
-  sid = null,
-  isServer
+  sid = null
 }: any) => {
   let res: any | {}
 
-  if (isServer) {
-    res = await postBySid(`update-popularity`, { pid, store: storeId }, sid)
-  } else {
-    res = await post(`update-popularity`, { pid, store: storeId }, origin)
-  }
+  // if (isServer) {
+  //   res = await postBySid(`update-popularity`, { pid, store: storeId }, sid)
+  // } else {
+  res = await post(`update-popularity`, origin, { pid, store: storeId }, sid)
+  // }
 
   return res
 }

@@ -81,12 +81,14 @@ export const saveReview = async ({
   pid,
   rating,
   storeId,
-  origin
+  origin,
+  sid
 }: any) => {
   let res: any = {}
 
   res = await post(
     `reviews`,
+    origin,
     {
       id,
       images,
@@ -96,7 +98,7 @@ export const saveReview = async ({
       rating,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res

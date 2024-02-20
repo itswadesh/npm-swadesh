@@ -1,49 +1,54 @@
 import { del, getAPI, post } from './../../utils/api'
 
-
-
 export const fetchReels = async ({
   currentPage = 1,
   origin,
   q = '',
   sid = null,
   sort = '-updatedAt',
-  storeId,
+  storeId
 }: any) => {
-    let res = {}
+  let res = {}
 
-    // if (isServer) {
-    //   res = await getBySid(
-    //     `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
-    //     sid
-    //   )
-    // } else {
-    //   res = await getAPI(
-    //     `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
-    //     origin
-    //   )
-    // }
+  // if (isServer) {
+  //   res = await getBySid(
+  //     `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
+  //     sid
+  //   )
+  // } else {
+  //   res = await getAPI(
+  //     `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
+  //     origin
+  //   )
+  // }
 
-    res = await getAPI(
-      `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
-      origin, sid
-    )
+  res = await getAPI(
+    `reels?page=${currentPage}&search=${q}&sort=${sort}&store=${storeId}`,
+    origin,
+    sid
+  )
 
-    return res
+  return res
 }
 
-export const fetchReel = async ({ id, origin, sid = null, storeId, isServer }: any) => {
-    let res = {}
+export const fetchReel = async ({
+  id,
+  origin,
+  sid = null,
+  storeId,
+  isServer
+}: any) => {
+  let res = {}
 
-    // if (isServer) {
-    //   res = await getBySid(`reels/${id}?store=${storeId}`, sid)
-    // } else {
-    //   res = await getAPI(`reels/${id}?store=${storeId}`, origin)
-    // }
+  // if (isServer) {
+  //   res = await getBySid(`reels/${id}?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`reels/${id}?store=${storeId}`, origin)
+  // }
 
-    res = await getAPI(`reels/${id}?store=${storeId}`, origin, sid)
+  res = await getAPI(`reels/${id}?store=${storeId}`, origin, sid)
 
-    return res
+  return res
 }
 
 export const saveReel = async ({
@@ -55,26 +60,27 @@ export const saveReel = async ({
   product,
   type,
   sid = null,
-  storeId,
-}: any) => {  
-    let res = {}
+  storeId
+}: any) => {
+  let res = {}
 
-    res = await post(
-      `reels`,
-      {
-        id,
-        active,
-        img,
-        link,
-        name,
-        product,
-        type,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `reels`,
+    origin,
+    {
+      id,
+      active,
+      img,
+      link,
+      name,
+      product,
+      type,
+      store: storeId
+    },
+    sid
+  )
 
-    return res
+  return res
 }
 
 export const deleteReel = async ({ id, origin, sid = null, storeId }: any) => {

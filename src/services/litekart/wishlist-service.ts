@@ -4,24 +4,24 @@ import { postBySid } from './../../utils/server'
 export const moveUnavailableItemsToWishlist = async ({
   origin,
   storeId,
-  sid = null,
-  isServer
+  sid = null
 }) => {
   let res: any = {}
 
-  if (isServer) {
-    res = await postBySid(
-      `wishlists/move-unavailable-items-to-wishlist?store=${storeId}`,
-      { store: storeId },
-      sid
-    )
-  } else {
-    res = await post(
-      `wishlists/move-unavailable-items-to-wishlist?store=${storeId}`,
-      { store: storeId },
-      origin
-    )
-  }
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `wishlists/move-unavailable-items-to-wishlist?store=${storeId}`,
+  //     { store: storeId },
+  //     sid
+  //   )
+  // } else {
+  res = await post(
+    `wishlists/move-unavailable-items-to-wishlist?store=${storeId}`,
+    origin,
+    { store: storeId },
+    sid
+  )
+  // }
 
   return res || {}
 }
@@ -93,24 +93,24 @@ export const toggleWishlistService = async ({
   vid,
   origin,
   sid = null,
-  storeId,
-  isServer
+  storeId
 }) => {
   let res: any = {}
 
-  if (isServer) {
-    res = await postBySid(
-      `wishlists/toggle`,
-      { product: pid, variant: vid, store: storeId },
-      sid
-    )
-  } else {
-    res = await post(
-      `wishlists/toggle`,
-      { product: pid, variant: vid, store: storeId },
-      origin
-    )
-  }
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `wishlists/toggle`,
+  //     { product: pid, variant: vid, store: storeId },
+  //     sid
+  //   )
+  // } else {
+  res = await post(
+    `wishlists/toggle`,
+    origin,
+    { product: pid, variant: vid, store: storeId },
+    sid
+  )
+  // }
 
   return res
 }

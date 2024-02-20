@@ -1,5 +1,5 @@
 import { getAPI, post, put } from './../../utils/api'
-import { postBySid } from './../../utils/server'
+// import { postBySid } from './../../utils/server'
 
 export const fetchMeData = async ({ origin, storeId, sid = null }: any) => {
   let res: any = {}
@@ -30,6 +30,7 @@ export const signupService = async ({
 
   res = await post(
     `signup`,
+    origin,
     {
       firstName,
       lastName,
@@ -39,7 +40,7 @@ export const signupService = async ({
       passwordConfirmation,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res
@@ -67,8 +68,9 @@ export const loginService = async ({
 }: any) => {
   let res: any = {}
 
-  res = await postBySid(
+  res = await post(
     `login`,
+    origin,
     {
       email,
       password,
@@ -91,12 +93,13 @@ export const forgotPasswordService = async ({
 
   res = await post(
     `users/forgot-password`,
+    origin,
     {
       email,
       referrer,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res
@@ -115,6 +118,7 @@ export const resetPasswordService = async ({
 
   res = await post(
     `users/reset-password`,
+    origin,
     {
       id,
       token,
@@ -122,7 +126,7 @@ export const resetPasswordService = async ({
       passwordConfirmation,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res
@@ -140,13 +144,14 @@ export const changePasswordService = async ({
 
   res = await post(
     `users/change-password`,
+    origin,
     {
       oldPassword,
       password,
       passwordConfirmation,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res
@@ -167,11 +172,12 @@ export const getOtpService = async ({
 
   res = await post(
     `get-otp`,
+    origin,
     {
       phone,
       store: storeId
     },
-    origin
+    sid
   )
 
   return res
@@ -187,12 +193,13 @@ export const verifyOtpService = async ({
 
   res = await post(
     `verify-otp`,
+    origin,
     {
       phone,
       otp,
       store: storeId
     },
-    origin
+    null
   )
 
   return res
@@ -201,7 +208,7 @@ export const verifyOtpService = async ({
 export const logoutService = async ({ storeId, origin, sid = null }: any) => {
   let res: any = {}
 
-  res = await postBySid(`logout?store=${storeId}`, {}, sid)
+  res = await post(`logout?store=${storeId}`, origin, {}, sid)
 
   return res
 }
@@ -231,31 +238,32 @@ export const verifyEmail = async ({
 }) => {
   let res = {}
 
-  if (isServer) {
-    res = await postBySid(
-      `verify-email`,
-      {
-        id,
-        expires,
-        signature,
-        token,
-        store: storeId
-      },
-      sid
-    )
-  } else {
-    res = await post(
-      `verify-email`,
-      {
-        id,
-        expires,
-        signature,
-        token,
-        store: storeId
-      },
-      origin
-    )
-  }
+  // if (isServer) {
+  //   res = await postBySid(
+  //     `verify-email`,origin
+  //     {
+  //       id,
+  //       expires,
+  //       signature,
+  //       token,
+  //       store: storeId
+  //     },
+  //     sid
+  //   )
+  // } else {
+  res = await post(
+    `verify-email`,
+    origin,
+    {
+      id,
+      expires,
+      signature,
+      token,
+      store: storeId
+    },
+    sid
+  )
+  // }
 
   return res
 }

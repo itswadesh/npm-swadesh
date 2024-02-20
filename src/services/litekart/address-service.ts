@@ -1,12 +1,7 @@
 import { getAPI } from './../../utils/api'
 import { postBySid, delBySid } from './../../utils/server'
 
-export const fetchAddresses = async ({
-  origin,
-  storeId,
-  isCors = false,
-  sid = null
-}) => {
+export const fetchAddresses = async ({ origin, storeId, sid = null }) => {
   let res: any = {}
   let preSelectedAddress = ''
   let myAddresses = []
@@ -29,12 +24,7 @@ export const fetchAddresses = async ({
   }
 }
 
-export const fetchAddress = async ({
-  origin,
-  storeId,
-  sid = null,
-  id
-}) => {
+export const fetchAddress = async ({ origin, storeId, sid = null, id }) => {
   let res: any = {}
 
   // if (isServer) {
@@ -43,7 +33,7 @@ export const fetchAddress = async ({
   //   res = await getAPI(`addresses/${id}`, origin)
   // }
 
-  res = await getAPI(`addresses/${id}`, origin,sid)
+  res = await getAPI(`addresses/${id}?store=${storeId}`, origin, sid)
 
   return res || {}
 }
@@ -126,6 +116,6 @@ export const editAddress = async ({
 
 export const deleteAddress = async ({ id, storeId, origin, sid = null }) => {
   const res = await delBySid(`addresses/${id}?store=${storeId}`, sid)
-  
+
   return res
 }

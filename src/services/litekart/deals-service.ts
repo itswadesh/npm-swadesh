@@ -1,22 +1,20 @@
 import { getAPI } from './../../utils/api'
 
-
 export const fetchDeals = async ({
-  isCors = false,
   origin,
   query,
   storeId,
-  sid = null,
+  sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    // if (isServer || isCors) {
-    //   res = await getBySid(`deals?store=${storeId}`, sid)
-    // } else {
-    //   res = await getAPI(`deals?store=${storeId}`, origin)
-    // }
+  // if (isServer || isCors) {
+  //   res = await getBySid(`deals?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`deals?store=${storeId}`, origin)
+  // }
 
-    res = await getAPI(`deals?store=${storeId}`, origin, sid)
+  res = await getAPI(`deals?store=${storeId}`, origin, sid)
 
-    return res || {}
+  return res || {}
 }

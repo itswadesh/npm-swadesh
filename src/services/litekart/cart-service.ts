@@ -1,5 +1,5 @@
 import { del, getAPI, post } from './../../utils/api'
-import {  postBySid } from './../../utils/server'
+import { postBySid } from './../../utils/server'
 
 export const fetchCartData = async ({
   cartId = null,
@@ -16,7 +16,7 @@ export const fetchCartData = async ({
     //   res = await getAPI(`cart?store=${storeId}&cart_id=${cartId}`, origin)
     // }
 
-    res = await getAPI(`cart?store=${storeId}&cart_id=${cartId}`, origin,sid)
+    res = await getAPI(`cart?store=${storeId}&cart_id=${cartId}`, origin, sid)
   }
 
   return res || {}
@@ -24,7 +24,6 @@ export const fetchCartData = async ({
 
 export const fetchRefreshCart = async ({
   cartId,
-  isCors = false,
   origin = null,
   sid = null,
   storeId
@@ -46,9 +45,10 @@ export const fetchRefreshCart = async ({
     // }
 
     res = await getAPI(
-          `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
-          origin,sid
-        )
+      `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
+      origin,
+      sid
+    )
   }
 
   return res || {}
@@ -68,8 +68,12 @@ export const fetchMyCart = async ({
     // } else {
     //   res = await getAPI(`carts/my?store=${storeId}&cart_id=${cartId}`, origin)
     // }
-    
-    res = await getAPI(`carts/my?store=${storeId}&cart_id=${cartId}`, origin, sid)
+
+    res = await getAPI(
+      `carts/my?store=${storeId}&cart_id=${cartId}`,
+      origin,
+      sid
+    )
   }
 
   return res || {}
@@ -134,7 +138,7 @@ export const createBackOrder = async ({
   storeId
 }) => {
   let res = {}
-  
+
   if (isServer) {
     res = await postBySid(
       `backorder`,
@@ -165,7 +169,6 @@ export const applyCouponService = async ({
   cartId,
   code,
   origin,
-  isServer,
   sid = null,
   storeId
 }) => {

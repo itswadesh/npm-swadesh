@@ -22,7 +22,8 @@ export const fetchBanners = async ({
 
   res = await getAPI(
     `banners?pageId=${pageId}&store=${storeId}&active=true`,
-    origin,sid
+    origin,
+    sid
   )
 
   return res.data || []
@@ -32,7 +33,6 @@ export const fetchBannersGroup = async ({
   origin,
   storeId,
   pageId,
-  isServer,
   sid = null
 }: any) => {
   let res: any = {}
@@ -48,10 +48,11 @@ export const fetchBannersGroup = async ({
   //     origin
   //   )
   // }
-  
+
   res = await getAPI(
     `banners?pageId=${pageId}&store=${storeId}&active=true`,
-    origin,sid
+    origin,
+    sid
   )
 
   return res.data || []

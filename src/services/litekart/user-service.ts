@@ -1,24 +1,18 @@
 import { getAPI, post, put } from './../../utils/api'
-import {  postBySid } from './../../utils/server'
+import { postBySid } from './../../utils/server'
 
+export const fetchMeData = async ({ origin, storeId, sid = null }: any) => {
+  let res: any = {}
 
-export const fetchMeData = async ({
-  isCors = false,
-  origin,
-  storeId,
-  sid = null,
-}: any) => {
-    let res: any = {}
+  // if (isServer || isCors) {
+  //   res = await getBySid(`users/me?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`users/me?store=${storeId}`, origin)
+  // }
 
-    // if (isServer || isCors) {
-    //   res = await getBySid(`users/me?store=${storeId}`, sid)
-    // } else {
-    //   res = await getAPI(`users/me?store=${storeId}`, origin)
-    // }
+  res = await getAPI(`users/me?store=${storeId}`, origin, sid)
 
-    res = await getAPI(`users/me?store=${storeId}`, origin, sid)
-
-    return res || {}
+  return res || {}
 }
 
 export const signupService = async ({
@@ -32,23 +26,23 @@ export const signupService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(
-      `signup`,
-      {
-        firstName,
-        lastName,
-        phone,
-        email,
-        password,
-        passwordConfirmation,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `signup`,
+    {
+      firstName,
+      lastName,
+      phone,
+      email,
+      password,
+      passwordConfirmation,
+      store: storeId
+    },
+    origin
+  )
 
-    return res
+  return res
 }
 
 export const googleOneTapLoginService = async ({
@@ -57,11 +51,11 @@ export const googleOneTapLoginService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(`auth/google/onetap`, data, origin)
+  res = await post(`auth/google/onetap`, data, origin)
 
-    return res
+  return res
 }
 
 export const loginService = async ({
@@ -71,19 +65,19 @@ export const loginService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await postBySid(
-      `login`,
-      {
-        email,
-        password,
-        store: storeId
-      },
-      sid
-    )
+  res = await postBySid(
+    `login`,
+    {
+      email,
+      password,
+      store: storeId
+    },
+    sid
+  )
 
-    return res
+  return res
 }
 
 export const forgotPasswordService = async ({
@@ -93,19 +87,19 @@ export const forgotPasswordService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(
-      `users/forgot-password`,
-      {
-        email,
-        referrer,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `users/forgot-password`,
+    {
+      email,
+      referrer,
+      store: storeId
+    },
+    origin
+  )
 
-    return res
+  return res
 }
 
 export const resetPasswordService = async ({
@@ -117,21 +111,21 @@ export const resetPasswordService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(
-      `users/reset-password`,
-      {
-        id,
-        token,
-        password,
-        passwordConfirmation,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `users/reset-password`,
+    {
+      id,
+      token,
+      password,
+      passwordConfirmation,
+      store: storeId
+    },
+    origin
+  )
 
-    return res
+  return res
 }
 
 export const changePasswordService = async ({
@@ -142,20 +136,20 @@ export const changePasswordService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(
-      `users/change-password`,
-      {
-        oldPassword,
-        password,
-        passwordConfirmation,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `users/change-password`,
+    {
+      oldPassword,
+      password,
+      passwordConfirmation,
+      store: storeId
+    },
+    origin
+  )
 
-    return res
+  return res
 }
 
 export const getOtpService = async ({
@@ -169,18 +163,18 @@ export const getOtpService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(
-      `get-otp`,
-      {
-        phone,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `get-otp`,
+    {
+      phone,
+      store: storeId
+    },
+    origin
+  )
 
-    return res
+  return res
 }
 
 export const verifyOtpService = async ({
@@ -189,27 +183,27 @@ export const verifyOtpService = async ({
   storeId,
   origin
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await post(
-      `verify-otp`,
-      {
-        phone,
-        otp,
-        store: storeId
-      },
-      origin
-    )
+  res = await post(
+    `verify-otp`,
+    {
+      phone,
+      otp,
+      store: storeId
+    },
+    origin
+  )
 
-    return res
+  return res
 }
 
 export const logoutService = async ({ storeId, origin, sid = null }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await postBySid(`logout?store=${storeId}`, {}, sid)
+  res = await postBySid(`logout?store=${storeId}`, {}, sid)
 
-    return res
+  return res
 }
 
 export const updateProfileService = async ({
@@ -218,11 +212,11 @@ export const updateProfileService = async ({
   origin,
   sid = null
 }: any) => {
-    let res: any = {}
+  let res: any = {}
 
-    res = await put(`users/update-profile`, e, origin)
+  res = await put(`users/update-profile`, e, origin)
 
-    return res
+  return res
 }
 
 export const verifyEmail = async ({
@@ -235,33 +229,33 @@ export const verifyEmail = async ({
   storeId,
   isServer
 }) => {
-    let res = {}
+  let res = {}
 
-    if (isServer) {
-      res = await postBySid(
-        `verify-email`,
-        {
-          id,
-          expires,
-          signature,
-          token,
-          store: storeId
-        },
-        sid
-      )
-    } else {
-      res = await post(
-        `verify-email`,
-        {
-          id,
-          expires,
-          signature,
-          token,
-          store: storeId
-        },
-        origin
-      )
-    }
+  if (isServer) {
+    res = await postBySid(
+      `verify-email`,
+      {
+        id,
+        expires,
+        signature,
+        token,
+        store: storeId
+      },
+      sid
+    )
+  } else {
+    res = await post(
+      `verify-email`,
+      {
+        id,
+        expires,
+        signature,
+        token,
+        store: storeId
+      },
+      origin
+    )
+  }
 
-    return res
+  return res
 }

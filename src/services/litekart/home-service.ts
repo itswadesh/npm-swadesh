@@ -1,44 +1,42 @@
 import { getAPI } from './../../utils/api'
 
-
 export const fetchHome = async ({
-  isCors = false,
   origin,
   pageId = 'home',
   sid = null,
   storeId,
   isServer
 }: any) => {
-    let categories = {}
-    let res: any = {}
+  let categories = {}
+  let res: any = {}
 
-    // if (isServer || isCors) {
-    //   res = await getBySid(`home?store=${storeId}&pageId=${pageId}`, sid)
-    // } else {
-    //   res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin)
-    // }
+  // if (isServer || isCors) {
+  //   res = await getBySid(`home?store=${storeId}&pageId=${pageId}`, sid)
+  // } else {
+  //   res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin)
+  // }
 
-    res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin, sid)
+  res = await getAPI(`home?store=${storeId}&pageId=${pageId}`, origin, sid)
 
-    if (res?.categories?.data?.length) {
-      categories = res?.categories?.data
-    }
+  if (res?.categories?.data?.length) {
+    categories = res?.categories?.data
+  }
 
-    return {
-      brands: res?.brands,
-      categories,
-      html: res?.html,
-      page: res?.page,
-      trending: res?.trending,
-      youMayLike: res?.youMayLike
-    }
+  return {
+    brands: res?.brands,
+    categories,
+    html: res?.html,
+    page: res?.page,
+    trending: res?.trending,
+    youMayLike: res?.youMayLike
+  }
 }
 
 export const fetchCategoriesProducts = async ({
   categories,
   origin,
   sid = null,
-  storeId,
+  storeId
 }) => {
   let categoriesProducts
 
@@ -56,7 +54,8 @@ export const fetchCategoriesProducts = async ({
 
   categoriesProducts = await getAPI(
     `es/products?categories=${categories}&sort=-updatedAt&limit=20&store=${storeId}`,
-    origin, sid
+    origin,
+    sid
   )
 
   return categoriesProducts

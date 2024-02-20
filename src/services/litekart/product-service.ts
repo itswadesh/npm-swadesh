@@ -4,7 +4,6 @@ import { getBySid } from '../../utils/server'
 export const fetchProducts = async ({
   query = '',
   origin,
-  isCors = false,
   sid = null,
   storeId
 }: any) => {
@@ -21,11 +20,7 @@ export const fetchProducts = async ({
   return res?.data || []
 }
 
-export const fetchReels = async ({
-  origin,
-  storeId,
-  sid = null
-}: any) => {
+export const fetchReels = async ({ origin, storeId, sid = null }: any) => {
   let res: any = {}
 
   // if (isServer) {
@@ -45,14 +40,7 @@ export const fetchReels = async ({
 
 // Fetch single product
 
-export const fetchProduct = async ({
-  origin,
-  slug,
-  id,
-  storeId,
-  isCors = false,
-  sid
-}) => {
+export const fetchProduct = async ({ origin, slug, id, storeId, sid }) => {
   let res: object = {}
 
   // if (isServer || isCors) {
@@ -117,10 +105,11 @@ export const fetchProductsOfCategory = async ({
   //     origin
   //   )
   // }
-  
+
   res = await getAPI(
     `es/products?categories=${categorySlug}&zip=${zip || ''}&store=${storeId}&${query}`,
-    origin, sid
+    origin,
+    sid
   )
 
   products = res?.data?.map((p) => {
@@ -144,7 +133,6 @@ export const fetchProductsOfCategory = async ({
 
 // Fetch next product
 export const fetchNextPageProducts = async ({
-  isCors = false,
   origin,
   storeId,
   categorySlug,
@@ -169,7 +157,8 @@ export const fetchNextPageProducts = async ({
 
   res = await getAPI(
     `es/products?categories=${categorySlug}&store=${storeId}&page=${nextPage}&${searchParams}`,
-    origin, sid
+    origin,
+    sid
   )
 
   nextPageData = res?.data?.map((p) => {
@@ -194,7 +183,6 @@ export const fetchNextPageProducts = async ({
 // Fetch related products
 
 export const fetchRelatedProducts = async ({
-  isCors = false,
   origin,
   storeId,
   categorySlug,
@@ -217,7 +205,8 @@ export const fetchRelatedProducts = async ({
 
   relatedProductsRes = await getAPI(
     `es/products?categories=${categorySlug}&store=${storeId}`,
-    origin, sid
+    origin,
+    sid
   )
 
   const relatedProducts = relatedProductsRes?.data.filter((p) => {

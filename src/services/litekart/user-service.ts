@@ -1,5 +1,4 @@
 import { getAPI, post, put } from './../../utils/api'
-// import { postBySid } from './../../utils/server'
 
 export const fetchMeData = async ({ origin, storeId, sid = null }: any) => {
   let res: any = {}

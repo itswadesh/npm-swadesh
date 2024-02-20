@@ -89,7 +89,7 @@ const send = async ({ method, path, params, data, headers, origin }: any) => {
 		opts.credentials = 'include'
 		opts.headers['cookie'] = `connect.sid=${sid}`
 	}
-	console.log(opts, url)
+	// console.log(opts, url)
 	const response = await fetch(url, opts)
 	if (method === 'POST' && sid && path.includes('logout')) {
 		return true
@@ -243,7 +243,10 @@ export const getAPI = (path: string, origin: string, sid?: string) => {
 //   return send({ method: 'GET', path, origin, headers })
 // }
 
-export const del = (path: string, origin: string, headers?: any) => {
+export const del = (path: string, origin: string, sid?: any) => {
+	const headers = {
+		sid: sid
+	}
   return send({ method: 'DELETE', path, origin, headers })
 }
 

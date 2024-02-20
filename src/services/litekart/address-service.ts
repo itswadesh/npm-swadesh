@@ -1,5 +1,4 @@
-import { getAPI } from './../../utils/api'
-import { postBySid, delBySid } from './../../utils/server'
+import { del, getAPI, post } from './../../utils/api'
 
 export const fetchAddresses = async ({ origin, storeId, sid = null }) => {
   let res: any = {}
@@ -55,8 +54,9 @@ export const saveAddress = async ({
 }) => {
   let res: any = {}
 
-  res = await postBySid(
+  res = await post(
     `addresses`,
+    origin,
     {
       id,
       address,
@@ -93,8 +93,9 @@ export const editAddress = async ({
 }) => {
   let res: any = {}
 
-  res = await postBySid(
+  res = await post(
     `addresses`,
+    origin,
     {
       id,
       address,
@@ -115,7 +116,7 @@ export const editAddress = async ({
 }
 
 export const deleteAddress = async ({ id, storeId, origin, sid = null }) => {
-  const res = await delBySid(`addresses/${id}?store=${storeId}`, sid)
+  const res = await del(`addresses/${id}?store=${storeId}`,origin, sid)
 
   return res
 }

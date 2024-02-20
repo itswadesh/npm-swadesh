@@ -1,5 +1,4 @@
 import { del, getAPI, post } from './../../utils/api'
-import { postBySid } from './../../utils/server'
 
 export const fetchCartData = async ({
   cartId = null,
@@ -174,14 +173,13 @@ export const removeCouponService = async ({
   code,
   origin,
   sid = null,
-  isServer,
   storeId
 }) => {
   let res = {}
 
   res = await del(
     `coupons/remove?code=${code}&store=${storeId}&cart_id=${cartId}`,
-    origin
+    origin,sid
   )
 
   return res || {}

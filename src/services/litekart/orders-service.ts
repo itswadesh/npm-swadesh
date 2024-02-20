@@ -1,5 +1,4 @@
 import { getAPI, post } from './../../utils/api'
-import { postBySid } from './../../utils/server'
 
 export const fetchOrders = async ({ origin = null, sid = null, storeId }) => {
   let res: any = {}
@@ -214,8 +213,9 @@ export const cashfreeCheckout = async ({
 export const cashfreeCapture = async ({ order_no, origin, sid, storeId }) => {
   let res = {}
 
-  res = await postBySid(
+  res = await post(
     `checkout/cashfree-capture`,
+    origin,
     {
       domain: origin,
       order_no,

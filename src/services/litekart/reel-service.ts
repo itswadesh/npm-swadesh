@@ -84,5 +84,5 @@ export const saveReel = async ({
 }
 
 export const deleteReel = async ({ id, origin, sid = null, storeId }: any) => {
-  await del(`reels/${id}?store=${storeId}`, origin)
+  await del(`reels/${id}?store=${storeId}`, origin,sid)
 }

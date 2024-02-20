@@ -92,11 +92,10 @@ export const addToCartService = async ({
   isServer,
   storeId
 }) => {
-  let res = {}
-
-  if (isServer) {
-    res = await postBySid(
+    let res = {}
+    res = await post(
       `carts/add-to-cart?store=${storeId}&cart_id=${cartId}`,
+      'http://localhost:3000',
       {
         cart_id: cartId,
         customizedData,
@@ -109,23 +108,6 @@ export const addToCartService = async ({
       },
       sid
     )
-  } else {
-    res = await post(
-      `carts/add-to-cart?store=${storeId}&cart_id=${cartId}`,
-      {
-        pid,
-        vid,
-        qty,
-        customizedImg,
-        store: storeId,
-        cart_id: cartId,
-        customizedData,
-        options
-      },
-      origin
-    )
-  }
-
   return res || {}
 }
 

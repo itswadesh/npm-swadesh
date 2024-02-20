@@ -91,6 +91,9 @@ const send = async ({ method, path, params, data, headers, origin }: any) => {
 	}
 	console.log(opts, url)
 	const response = await fetch(url, opts)
+	if (method === 'POST' && sid && path.includes('logout')) {
+		return true
+	}
 	const isJson = response.headers.get('content-type')?.includes('application/json')
 
 	const res = isJson ? await response.json() : await response.text()
@@ -103,7 +106,9 @@ const send = async ({ method, path, params, data, headers, origin }: any) => {
 		const setCookieForLogin = response.headers.get('set-cookie')
 		if (setCookieForLogin) {
 			const sidCookie = cookie.parse(setCookieForLogin)
-			res.sid = sidCookie['connect.sid']
+			if (typeof res === 'object' && res !== null) {
+			  res.sid = sidCookie['connect.sid']
+			}
 		}
 		return res
 	}
@@ -244,10 +249,13 @@ export const del = (path: string, origin: string, headers?: any) => {
 
 export const post = (
   path: string,
+  origin: string,
   data?: any,
-  origin?: string,
-  headers?: any
+  sid?: string
 ) => {
+	const headers = {
+		sid: sid
+	}
   return send({ method: 'POST', path, data, origin, headers })
 }
 

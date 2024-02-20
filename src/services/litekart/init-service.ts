@@ -1,15 +1,11 @@
+import { getAPI } from '../../utils'
 import { DOMAIN } from './../../config'
-import { getBySid, gett } from './../../utils/server'
 
-export const fetchInit = async ({ host, origin = null ,isServer}) => {
-    let res = {}
+export const fetchInit = async ({ host, origin = null }) => {
+  let res = {}
 
-    // DOMAIN value is proviede in case of self hosted and host value in case of SaaS
-    if (!isServer) {
-      res = await gett(`init?domain=${DOMAIN ? DOMAIN : host}`, origin)
-    } else {
-      res = await getBySid(`init?domain=${DOMAIN ? DOMAIN : host}`)
-    }
+  // DOMAIN value is proviede in case of self hosted and host value in case of SaaS
+  res = await getAPI(`init?domain=${DOMAIN ? DOMAIN : host}`, origin)
 
-    return res || { storeOne: {} }
+  return res || { storeOne: {} }
 }

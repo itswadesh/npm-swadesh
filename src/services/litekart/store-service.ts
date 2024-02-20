@@ -28,14 +28,7 @@ import {
 } from './../../config'
 import { fetchInit } from './init-service'
 
-export const getStoreData = async ({
-  cookieStore,
-  cookieMegamenu,
-  host,
-  url,
-  cookies,
-  sid = null
-}: any) => {
+export const getStoreData = async ({ host }: any) => {
   let storeRes: any = {}
 
   let store = {
@@ -102,16 +95,6 @@ export const getStoreData = async ({
     weightUnit,
     whatsappChatButton: {}
   }
-
-  // let megamenu = null
-
-  // if (
-  // 	!cookieStore ||
-  // 	cookieStore === 'undefined' ||
-  // 	!cookieMegamenu ||
-  // 	cookieMegamenu == 'undefined'
-  // ) {
-  // const uri = new URL(url)
 
   storeRes = await fetchInit({ host })
 
@@ -186,13 +169,6 @@ export const getStoreData = async ({
     weightUnit: storeRes?.storeOne?.weightUnit,
     whatsappChatButton: storeRes?.storeOne?.whatsappChatButton
   }
-
-  // megamenu = storeRes.megamenu
-
-  // } else {
-  // 	store = JSON.parse(cookieStore)
-  // 	megamenu = JSON.parse(cookieMegamenu)
-  // }
 
   storeRes.storeOne = store
   // storeRes.megamenu = megamenu

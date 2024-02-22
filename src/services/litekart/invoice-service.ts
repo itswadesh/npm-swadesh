@@ -1,0 +1,15 @@
+import { getAPI, post, put } from './../../utils/api'
+
+export const fetchInvoices = async ({ query = '', isCors = false, origin = null, sid = null, storeId }) => {
+	let res = {}
+
+	// if (isServer || isCors) {
+	// 	res = await getBySid(`get-orders-invoices?store=${storeId}&${query}`, sid)
+	// } else {
+	// 	res = await getAPI(`get-orders-invoices?store=${storeId}&${query}`, origin)
+	// }
+
+	res = await getAPI(`get-orders-invoices?store=${storeId}&${query}`, origin, sid)
+
+	return res || {}
+}

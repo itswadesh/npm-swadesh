@@ -39,6 +39,44 @@ export const fetchOrder = async ({
   return res || {}
 }
 
+export const fetchOrderSummary = async ({ origin = null, sid = null, storeId }) => {
+  let res = {}
+
+  // if (isServer) {
+  //   res = await getBySid(`orders/order-summary-by-status?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`orders/order-summary-by-status?store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`orders/order-summary-by-status?store=${storeId}`, origin, sid)
+
+  return res || {}
+}
+
+export const updateOrderStatus = async ({
+  comment,
+  order_no,
+  status,
+  origin,
+  sid = null,
+  storeId
+}) => {
+  let res = {}
+
+  res = await post(
+    `orders/update-order-status`,
+    {
+      comment,
+      order_no,
+      status,
+      store: storeId
+    },
+    origin, sid
+  )
+
+  return res || {}
+}
+
 export const fetchTrackOrder = async ({ id, origin, sid = null, storeId }) => {
   let res = {}
 
@@ -107,18 +145,18 @@ export const paySuccessPageHit = async ({
   //     sid
   //   )
   // } else {
-    res = await post(
-      `orders/pay-success-page-hit`,
-      origin,
-      {
-        orderId,
-        paymentMode,
-        status,
-        store: storeId
-      },
-      sid
-    )
-  
+  res = await post(
+    `orders/pay-success-page-hit`,
+    origin,
+    {
+      orderId,
+      paymentMode,
+      status,
+      store: storeId
+    },
+    sid
+  )
+
 
   return res || {}
 }
@@ -188,7 +226,7 @@ export const cashfreeCheckout = async ({
   origin,
   cartId,
   storeId,
-  sid= null
+  sid = null
 }) => {
   let res = {}
 
@@ -262,7 +300,7 @@ export const razorpayCapture = async ({
   rpPaymentId,
   origin,
   storeId,
-  sid=null
+  sid = null
 }) => {
   let res = {}
 
@@ -313,7 +351,7 @@ export const paypalCheckout = async ({
   cartId,
   origin,
   storeId,
-  sid=null
+  sid = null
 }) => {
   let res = {}
 

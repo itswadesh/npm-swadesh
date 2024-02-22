@@ -56,6 +56,30 @@ export const fetchWishlist = async ({
   return res || []
 }
 
+export const fetchWishlistGroups = async ({
+  wishlistedProductsPids = [],
+  origin,
+  storeId,
+  search = null,
+  sort = '-createdAt',
+  currentPage = 1,
+  sid = null
+}) => {
+  let res: any = {}
+
+  // if (isServer) {
+  //   res = await postBySid(`wishlists/group-by-vendor`, { productIds: wishlistedProductsPids, store: storeId }, sid)
+  // } else {
+  //   res = await post(`wishlists/group-by-vendor`, { productIds: wishlistedProductsPids, store: storeId }, origin)
+  // }
+
+  res = await post(`update-popularity`, origin, { productIds: wishlistedProductsPids, store: storeId }, sid)
+
+
+  return res || {}
+
+}
+
 export const checkWishlist = async ({
   origin,
   storeId,
@@ -110,6 +134,27 @@ export const toggleWishlistService = async ({
     sid
   )
   // }
+
+  return res
+}
+
+export const toggleWishlistTwoService = async ({
+  pid,
+  vid,
+  isCors = false,
+  origin,
+  sid = null,
+  storeId,
+}) => {
+  let res: any = {}
+
+  // if (isServer || isCors) {
+  //   res = await postBySid(`wishlists/toggle-two`, { product: pid, variant: vid, store: storeId }, sid)
+  // } else {
+  //   res = await post(`wishlists/toggle-two`, { product: pid, variant: vid, store: storeId }, origin)
+  // }
+
+  res = await post(`wishlists/toggle-two`, { product: pid, variant: vid, store: storeId }, origin, sid)
 
   return res
 }

@@ -14,6 +14,20 @@ export const fetchMeData = async ({ origin, storeId, sid = null }: any) => {
   return res || {}
 }
 
+export const fetchProfileData = async ({ origin, storeId, sid = null }: any) => {
+  let res: any = {}
+
+  // if (isServer) {
+  //   res = await getBySid(`users/profile?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`users/profile?store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`users/profile?store=${storeId}`, origin, sid)
+
+  return res || {}
+}
+
 export const signupService = async ({
   firstName,
   lastName,
@@ -41,6 +55,20 @@ export const signupService = async ({
     },
     sid
   )
+
+  return res
+}
+
+export const isEmailExist = async ({ email, storeId, origin, sid = null }: any) => {
+  let res: boolean = false
+
+  // if (isServer) {
+  //   res = await getBySid(`users/is-email-exists?email=${email}&store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`users/is-email-exists?email=${email}&store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`users/is-email-exists?email=${email}&store=${storeId}`, origin, sid)
 
   return res
 }

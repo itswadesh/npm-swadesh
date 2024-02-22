@@ -90,22 +90,22 @@ export const addToCartService = async ({
   sid = null,
   storeId
 }) => {
-    let res = {}
-    res = await post(
-      `carts/add-to-cart?store=${storeId}&cart_id=${cartId}`,
-      'http://localhost:3000',
-      {
-        cart_id: cartId,
-        customizedData,
-        customizedImg,
-        options,
-        pid,
-        qty,
-        vid,
-        store: storeId
-      },
-      sid
-    )
+  let res = {}
+  res = await post(
+    `carts/add-to-cart?store=${storeId}&cart_id=${cartId}`,
+    'http://localhost:3000',
+    {
+      cart_id: cartId,
+      customizedData,
+      customizedImg,
+      options,
+      pid,
+      qty,
+      vid,
+      store: storeId
+    },
+    sid
+  )
   return res || {}
 }
 
@@ -129,18 +129,18 @@ export const createBackOrder = async ({
   //     sid
   //   )
   // } else {
-    res = await post(
-      `backorder`,
-      origin,
-      {
-        id: 'new',
-        pid,
-        qty,
-        store: storeId
-      },
-      sid
-    )
-  
+  res = await post(
+    `backorder`,
+    origin,
+    {
+      id: 'new',
+      pid,
+      qty,
+      store: storeId
+    },
+    sid
+  )
+
 
   return res || {}
 }
@@ -179,7 +179,7 @@ export const removeCouponService = async ({
 
   res = await del(
     `coupons/remove?code=${code}&store=${storeId}&cart_id=${cartId}`,
-    origin,sid
+    origin, sid
   )
 
   return res || {}
@@ -213,20 +213,20 @@ export const updateCart = async ({
   //     sid
   //   )
   // } else {
-    res = await post(
-      `carts/update-cart`,
-      origin,
-      {
-        billing_address_id,
-        billing_address: billingAddress,
-        cart_id: cartId,
-        selfTakeout,
-        shipping_address_id,
-        shipping_address: shippingAddress,
-        store: storeId
-      },
-      sid
-    )
+  res = await post(
+    `carts/update-cart`,
+    origin,
+    {
+      billing_address_id,
+      billing_address: billingAddress,
+      cart_id: cartId,
+      selfTakeout,
+      shipping_address_id,
+      shipping_address: shippingAddress,
+      store: storeId
+    },
+    sid
+  )
 }
 
 export const updateCart2 = async ({
@@ -249,16 +249,16 @@ export const updateCart2 = async ({
   //     sid
   //   )
   // } else {
-    res = await post(
-      `carts/update-cart`,
-      origin,
-      {
-        cart_id: cartId,
-        selected_products_for_checkout,
-        store: storeId
-      },
-      sid
-    )
+  res = await post(
+    `carts/update-cart`,
+    origin,
+    {
+      cart_id: cartId,
+      selected_products_for_checkout,
+      store: storeId
+    },
+    sid
+  )
 
   return res || {}
 }
@@ -287,19 +287,19 @@ export const updateCart3 = async ({
   //     sid
   //   )
   // } else {
-    res = await post(
-      `carts/update-cart`,
-      origin,
-      {
-        cart_id: cartId,
-        selfTakeout,
-        shipping_address,
-        billing_address,
-        store: storeId
-      },
-      sid
-    )
-  
+  res = await post(
+    `carts/update-cart`,
+    origin,
+    {
+      cart_id: cartId,
+      selfTakeout,
+      shipping_address,
+      billing_address,
+      store: storeId
+    },
+    sid
+  )
+
 
   return res || {}
 }

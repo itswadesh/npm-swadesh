@@ -155,3 +155,31 @@ export const fetchMegamenuData = async ({
 
   return data || []
 }
+
+export const fetchCategoriesSelectedByUser = async ({
+  isCors = false,
+  origin,
+  sid = null,
+  storeId
+}) => {
+  let data: []
+
+  // if (isServer || isCors) {
+  //   data = await getBySid(
+  //     `category-selected-by-user?store=${storeId}`,
+  //     sid
+  //   )
+  // } else {
+  //   data = await getAPI(
+  //     `category-selected-by-user?store=${storeId}`,
+  //     origin
+  //   )
+  // }
+
+  data = await getAPI(
+    `category-selected-by-user?store=${storeId}`,
+    origin, sid
+  )
+
+  return data || []
+}

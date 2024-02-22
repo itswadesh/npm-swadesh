@@ -3,31 +3,31 @@ import { getAPI } from './../../utils/api'
 
 
 export const fetchVendors = async ({ origin, storeId, sid = null }) => {
-    let res: any = {}
+  let res: any = {}
 
-    // if (isServer) {
-    //   res = await getBySid(`vendors?store=${storeId}`, sid)
-    // } else {
-    //   res = await getAPI(`vendors?store=${storeId}`, origin)
-    // }
-    
-    res = await getAPI(`vendors?store=${storeId}`, origin, sid)
+  // if (isServer) {
+  //   res = await getBySid(`vendors?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`vendors?store=${storeId}`, origin)
+  // }
 
-    return res || {}
+  res = await getAPI(`vendors?store=${storeId}`, origin, sid)
+
+  return res || {}
 }
 
 export const fetchVendor = async ({ origin, slug, storeId, sid = null }) => {
-    let res: any = {}
+  let res: any = {}
 
-    // if (isServer) {
-    //   res = await getBySid(`vendors/${slug}?store=${storeId}`, sid)
-    // } else {
-    //   res = await getAPI(`vendors/${slug}?store=${storeId}`, origin)
-    // }
+  // if (isServer) {
+  //   res = await getBySid(`vendors/${slug}?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`vendors/${slug}?store=${storeId}`, origin)
+  // }
 
-    res = await getAPI(`vendors/${slug}?store=${storeId}`, origin, sid)
+  res = await getAPI(`vendors/${slug}?store=${storeId}`, origin, sid)
 
-    return res || {}
+  return res || {}
 }
 
 export const fetchProductsOfVendor = async ({
@@ -37,24 +37,38 @@ export const fetchProductsOfVendor = async ({
   sid = null,
   storeId,
 }) => {
-    let res = {}
+  let res = {}
 
-    // if (isServer) {
-    //   res = await getBySid(
-    //     `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
-    //     sid
-    //   )
-    // } else {
-    //   res = await getAPI(
-    //     `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
-    //     origin
-    //   )
-    // }
+  // if (isServer) {
+  //   res = await getBySid(
+  //     `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
+  //     sid
+  //   )
+  // } else {
+  //   res = await getAPI(
+  //     `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
+  //     origin
+  //   )
+  // }
 
-    res = await getAPI(
-      `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
-      origin, sid
-    )
+  res = await getAPI(
+    `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
+    origin, sid
+  )
 
-    return res || {}
+  return res || {}
+}
+
+export const fetchVendorByProductCategory = async ({ origin, sid = null, storeId }) => {
+  let res = {}
+
+  // if (isServer) {
+  //   res = await getBySid(`vendor-by-product-category-discount?store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`vendor-by-product-category-discount?store=${storeId}`, origin)
+  // }
+
+  res = await getAPI(`vendor-by-product-category-discount?store=${storeId}`, origin, sid)
+
+  return res || {}
 }

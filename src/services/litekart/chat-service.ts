@@ -33,13 +33,13 @@ export const sendNewMessage = async ({
 
     res = await post(
         `chats`,
+        origin,
         {
             img,
             message,
             vendor,
             store: storeId
         },
-        origin,
         sid
     )
 

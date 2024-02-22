@@ -93,7 +93,7 @@ export const addToCartService = async ({
   let res = {}
   res = await post(
     `carts/add-to-cart?store=${storeId}&cart_id=${cartId}`,
-    'http://localhost:3000',
+    origin,
     {
       cart_id: cartId,
       customizedData,

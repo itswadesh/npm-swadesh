@@ -65,13 +65,14 @@ export const updateOrderStatus = async ({
 
   res = await post(
     `orders/update-order-status`,
+    origin,
     {
       comment,
       order_no,
       status,
       store: storeId
     },
-    origin, sid
+    sid
   )
 
   return res || {}

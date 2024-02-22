@@ -17,6 +17,7 @@ export const sendReturnRequest = async ({
 
     res = await post(
         `returns`,
+        origin,
         {
             img,
             note,
@@ -28,7 +29,7 @@ export const sendReturnRequest = async ({
             tracking_no,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -46,13 +47,14 @@ export const sendBulkReturnRequest = async ({
 
     res = await post(
         `bulk-returns`,
+        origin,
         {
             description,
             shipping,
             items,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res

@@ -12,13 +12,14 @@ export const getHokodoOrderHistory = async ({
 
     res = await post(
         `hokodo/get-order-history`,
+        origin,
         {
             product_id,
             duration,
             flow_type,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -36,13 +37,14 @@ export const getBulkHokodoOrderHistory = async ({
 
     res = await post(
         `hokodo/check-bulk-reorder`,
+        origin,
         {
             product_ids,
             duration,
             flow_type,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -60,13 +62,14 @@ export const createCompany = async ({
 
     res = await post(
         `hokodo-onboarding/create-company`,
+        origin,
         {
             credit,
             id,
             name,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -82,12 +85,12 @@ export const createOrganisation = async ({
 
     res = await post(
         `hokodo-onboarding/create-organisation`,
-
+        origin,
         {
             company_id,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -106,6 +109,7 @@ export const createUser = async ({
 
     res = await post(
         `hokodo-onboarding/create-user`,
+        origin,
         {
             company_id,
             email,
@@ -113,7 +117,7 @@ export const createUser = async ({
             organisation_id,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -153,6 +157,7 @@ export const createOrder = async ({
 
     res = await post(
         `hokodo-checkout/create-orders`,
+        origin,
         {
             address,
             cart_id: cartId,
@@ -161,7 +166,7 @@ export const createOrder = async ({
             user_id,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -177,11 +182,12 @@ export const createPaymentOffer = async ({
 
     res = await post(
         `hokodo-checkout/payment-offer`,
+        origin,
         {
             hokodo_order_id,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -232,17 +238,17 @@ export const updateCreditLimit = async ({
     sid = null,
     storeId,
 }: any) => {
-
     let res: any = {}
 
     res = await post(
         `hokodo-onboarding/update-credit-limit`,
+        origin,
         {
             company_id,
             credit,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res
@@ -261,6 +267,7 @@ export const savePaymentInfo = async ({
 
     res = await post(
         `hokodo-checkout/save-payment-info`,
+        origin,
         {
             deferred_payment_id,
             hokodo_payment_offer_id,
@@ -268,7 +275,7 @@ export const savePaymentInfo = async ({
             payment_plan_id,
             store: storeId
         },
-        origin, sid
+        sid
     )
 
     return res

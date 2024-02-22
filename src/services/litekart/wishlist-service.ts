@@ -154,7 +154,7 @@ export const toggleWishlistTwoService = async ({
   //   res = await post(`wishlists/toggle-two`, { product: pid, variant: vid, store: storeId }, origin)
   // }
 
-  res = await post(`wishlists/toggle-two`, { product: pid, variant: vid, store: storeId }, origin, sid)
+  res = await post(`wishlists/toggle-two`, origin, { product: pid, variant: vid, store: storeId }, sid)
 
   return res
 }

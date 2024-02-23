@@ -73,11 +73,10 @@ export const fetchWishlistGroups = async ({
   //   res = await post(`wishlists/group-by-vendor`, { productIds: wishlistedProductsPids, store: storeId }, origin)
   // }
 
-  res = await post(`update-popularity`, origin, { productIds: wishlistedProductsPids, store: storeId }, sid)
+  res = await post(`wishlists/group-by-vendor`, origin, { productIds: wishlistedProductsPids, store: storeId }, sid)
 
 
   return res || {}
-
 }
 
 export const checkWishlist = async ({

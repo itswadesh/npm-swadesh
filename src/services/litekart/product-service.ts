@@ -17,7 +17,7 @@ export const fetchProducts = async ({
 
   res = await getAPI(`es/products?store=${storeId}&${query}`, origin, sid)
 
-  return res?.data || []
+  return res || {}
 }
 
 export const fetchReels = async ({ origin, storeId, sid = null }: any) => {

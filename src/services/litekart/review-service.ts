@@ -39,38 +39,18 @@ export const fetchReviews = async ({
 
 // Fetch product reviews
 
-export const fetchProductReviews = async ({
+export const fetchProductReviews = ({
   origin,
   page,
   slug,
   sid = null,
   storeId
 }: any) => {
-  let productReviewsRes: any = {}
-  // : ProductReviews[]
-  let productReviews = []
-
-  // if (isServer || isCors) {
-  //   productReviewsRes = await getBySid(
-  //     `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
-  //     sid
-  //   )
-  // } else {
-  //   productReviewsRes = await getAPI(
-  //     `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
-  //     origin
-  //   )
-  // }
-
-  productReviewsRes = await getAPI(
+  return getAPI(
     `reviews/product-reviews?slug=${slug}&page=${page}&sort=-createdAt&store=${storeId}`,
     origin,
     sid
   )
-
-  productReviews = productReviewsRes
-
-  return productReviews || []
 }
 
 export const saveReview = async ({

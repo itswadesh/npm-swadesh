@@ -40,40 +40,14 @@ export const fetchReels = async ({ origin, storeId, sid = null }: any) => {
 
 // Fetch single product
 
-export const fetchProduct = async ({ origin, slug, id, storeId, sid }) => {
-  let res: object = {}
-
-  // if (isServer || isCors) {
-  //   res = await getBySid(`es/products/${slug || id}?store=${storeId}`, sid)
-  // } else {
-  //   res = await getAPI(`es/products/${slug || id}?store=${storeId}`, origin)
-  // }
-
-  res = await getAPI(`es/products/${slug || id}?store=${storeId}`, origin, sid)
-
-  return res || {}
+export const fetchProduct = ({ origin, slug, id, storeId, sid }) => {
+  return getAPI(`es/products/${slug || id}?store=${storeId}`, origin, sid)
 }
 
 // Fetch products more requirements
 
-export const fetchProduct2 = async ({
-  origin,
-  slug,
-  storeId,
-  id,
-  sid = null
-}) => {
-  let res: object = {}
-
-  // if (isServer) {
-  //   res = await getBySid(`es/products2/${slug || id}?store=${storeId}`, sid)
-  // } else {
-  //   res = await getAPI(`es/products2/${slug || id}?store=${storeId}`, origin)
-  // }
-
-  res = await getAPI(`es/products2/${slug || id}?store=${storeId}`, origin, sid)
-
-  return res || {}
+export const fetchProduct2 = ({ origin, slug, storeId, id, sid = null }) => {
+  return getAPI(`es/products2/${slug || id}?store=${storeId}`, origin, sid)
 }
 
 // Fetch products based on category

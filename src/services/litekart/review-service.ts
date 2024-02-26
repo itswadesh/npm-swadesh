@@ -1,4 +1,4 @@
-import { getAPI, post } from './../../utils/api'
+import { del, getAPI, post } from './../../utils/api'
 
 export const fetchReviews = async ({
   origin,
@@ -100,6 +100,12 @@ export const saveReview = async ({
     },
     sid
   )
+
+  return res
+}
+
+export const deleteReview = async ({ id, storeId, origin, sid = null }) => {
+  const res = await del(`reviews?id=${id}&store=${storeId}`, origin, sid)
 
   return res
 }

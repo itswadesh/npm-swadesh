@@ -6,7 +6,7 @@ This npm package provides functionality to connect with the LiteKart backend and
 
 ## Installation
 
-You can install the LiteKart npm package using npm:
+You can install the LiteKart utility npm package using npm:
 
 ```bash 
 npm i @misiki/litekart-utils
@@ -21,7 +21,7 @@ pnpm i @misiki/litekart-utils
 
 ## Usages 
 
-you can use this by importing services and tehn using teh functions as needed
+you can use this by importing services and then using the functions as needed
 
 ```bash 
 import {services} from '@misiki/litekart-utils'

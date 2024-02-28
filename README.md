@@ -1,15 +1,38 @@
-# Suma dos _números_
+# LiteKart Utility NPM Package
 
-## Instalación 
+[![npm version](https://litekart.in/logo-litekart.png)](https://litekart.in)
 
-`npm install suma-dos`
-o
-`yarn install suma-dos`
+This npm package provides functionality to connect with the LiteKart backend and can be used as services.
 
-## Uso
+## Installation
 
-```js
-import { sumaDos } from 'suma-dos';
+You can install the LiteKart npm package using npm:
 
-sumaDos(1, 2)
+```bash 
+npm i @misiki/litekart-utils
 ```
+
+
+You can install the LiteKart npm package using pnpm:
+
+```bash 
+pnpm i @misiki/litekart-utils
+```
+
+## Usages 
+
+you can use this by importing services and tehn using teh functions as needed
+
+```bash 
+import {services} from '@misiki/litekart-utils'
+```
+
+```bash
+const data = await services.CartServices.fetchCart(
+    ...
+)
+```
+
+
+## Contributions
+We are in early phase of this npm package and needs contribution from the community.

@@ -152,6 +152,7 @@ export const createOrder = async ({
     origin,
     sid = null,
     storeId,
+    payment_flow,
 }: any) => {
     let res: any = {}
 
@@ -164,7 +165,8 @@ export const createOrder = async ({
             org_id,
             return_url: `${origin}/payment/success`,
             user_id,
-            store: storeId
+            store: storeId,
+            payment_flow
         },
         sid
     )

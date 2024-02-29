@@ -1,17 +1,29 @@
 import { getAPI } from './../../utils/api'
 
-
-
-export const fetchVendors = async ({ origin, storeId, sid = null }) => {
+export const fetchVendors = async ({ query = '', origin, storeId, sid = null }) => {
   let res: any = {}
 
   // if (isServer) {
-  //   res = await getBySid(`vendors?store=${storeId}`, sid)
+  //   res = await getBySid(`vendors?store=${storeId}&${query}`, sid)
   // } else {
   //   res = await getAPI(`vendors?store=${storeId}`, origin)
   // }
 
-  res = await getAPI(`vendors?store=${storeId}`, origin, sid)
+  res = await getAPI(`vendors?store=${storeId}&${query}&${query}`, origin, sid)
+
+  return res || {}
+}
+
+export const fetchEsVendors = async ({ query = '', origin, storeId, sid = null }) => {
+  let res: any = {}
+
+  // if (isServer) {
+  //   res = await getBySid(`vendors?store=${storeId}&${query}`, sid)
+  // } else {
+  //   res = await getAPI(`vendors?store=${storeId}&${query}`, origin)
+  // }
+
+  res = await getAPI(`es/vendors?store=${storeId}&${query}`, origin, sid)
 
   return res || {}
 }

@@ -1,22 +1,15 @@
 import { getAPI, post } from './../../utils/api'
 
 export const fetchOrders = async ({ query = '', status = null, origin = null, sid = null, storeId }) => {
-		let res = {}
-
-		res = await getAPI(`orders/my?store=${storeId}&status=${status}&active=true&${query}`,  origin, sid)
-
+		const res : any = await getAPI(`orders/my?store=${storeId}&status=${status}&active=true&${query}`,  origin, sid)
 		return {
-			count: res.count,
+			count: res.count || 0,
 			data: res.data || [],
-			noOfPage: res.noOfPage,
-			page: res.page,
-			pageSize: res.pageSize
+			noOfPage: res.noOfPage || 0,
+			page: res.page || 1,
+			pageSize: res.pageSize || 40
 		}
 }
-
-
-
-
 
 export const fetchOrder = async ({
   origin = null,

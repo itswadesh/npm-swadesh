@@ -10,6 +10,15 @@ export function constructURL2(url: string, fl: any) {
   return url
 }
 
+let inputValue = ''
+let timeout
+
+export const debounce = (func, delay = 500) => {
+  // 500ms debounce delay
+  clearTimeout(timeout)
+  timeout = setTimeout(() => func(inputValue), delay)
+}
+
 export const delay = (delayInms: number) => {
   return new Promise((resolve) => {
     setTimeout(() => {

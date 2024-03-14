@@ -13,3 +13,17 @@ export const fetchInvoices = async ({ query = '', isCors = false, origin = null,
 
 	return res || {}
 }
+
+export const fetchAllInvoices = async ({ query = '', isCors = false, origin = null, sid = null, storeId }) => {
+	let res = {}
+
+	// if (isServer || isCors) {
+	// 	res = await getBySid(`get-all-invoices?store=${storeId}&${query}`, sid)
+	// } else {
+	// 	res = await getAPI(`get-all-invoices?store=${storeId}&${query}`, origin)
+	// }
+
+	res = await getAPI(`get-all-invoices?store=${storeId}&${query}`, origin, sid)
+
+	return res || {}
+}

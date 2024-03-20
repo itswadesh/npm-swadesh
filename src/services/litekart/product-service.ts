@@ -61,12 +61,13 @@ export const fetchProductsOfCategory = async ({
   zip = null
 }) => {
   let res: any = {}
-  let products: [] = []
+  let brands = {}
+  let category = {}
   let count = 0
+  let err = ''
   let facets = ''
   let pageSize = 0
-  let category = {}
-  let err = ''
+  let products: [] = []
 
   // if (isServer) {
   //   res = await getBySid(
@@ -100,6 +101,7 @@ export const fetchProductsOfCategory = async ({
   facets = res?.facets
   pageSize = res?.pageSize
   category = res?.category
+  brands = res?.brands
   err = !res?.estimatedTotalHits ? 'No result Not Found' : null
 
   return { products, count, facets, pageSize, category, err }

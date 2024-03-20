@@ -104,7 +104,7 @@ export const fetchProductsOfCategory = async ({
   brands = res?.brands
   err = !res?.estimatedTotalHits ? 'No result Not Found' : null
 
-  return { products, count, facets, pageSize, category, err }
+  return { products, brands, count, facets, pageSize, category, err }
 }
 
 // Fetch next product

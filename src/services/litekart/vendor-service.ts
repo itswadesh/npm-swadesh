@@ -6,10 +6,10 @@ export const fetchVendors = async ({ query = '', origin, storeId, sid = null }) 
   // if (isServer) {
   //   res = await getBySid(`vendors?store=${storeId}&${query}`, sid)
   // } else {
-  //   res = await getAPI(`vendors?store=${storeId}`, origin)
+  //   res = await getAPI(`vendors?store=${storeId}&${query}`, origin)
   // }
 
-  res = await getAPI(`vendors?store=${storeId}&${query}&${query}`, origin, sid)
+  res = await getAPI(`vendors?store=${storeId}&${query}`, origin, sid)
 
   return res || {}
 }

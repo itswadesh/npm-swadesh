@@ -176,6 +176,7 @@ export const createOrder = async ({
 
 export const createPaymentOffer = async ({
     hokodo_order_id,
+    payment_flow,
     origin,
     sid = null,
     storeId,
@@ -187,6 +188,7 @@ export const createPaymentOffer = async ({
         origin,
         {
             hokodo_order_id,
+            payment_flow,
             store: storeId
         },
         sid

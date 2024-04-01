@@ -53,18 +53,18 @@ export const fetchProductsOfVendor = async ({
 
   // if (isServer) {
   //   res = await getBySid(
-  //     `es/products?vendors=${slug}store=${storeId}&${query}`,
+  //     `es/products?vendors=${slug}&store=${storeId}&${query}`,
   //     sid
   //   )
   // } else {
   //   res = await getAPI(
-  //     `es/products?vendors=${slug}store=${storeId}&${query}`,
+  //     `es/products?vendors=${slug}&store=${storeId}&${query}`,
   //     origin
   //   )
   // }
 
   res = await getAPI(
-    `es/products?vendors=${slug}store=${storeId}&${query}`,
+    `es/products?vendors=${slug}&store=${storeId}&${query}`,
     origin, sid
   )
 

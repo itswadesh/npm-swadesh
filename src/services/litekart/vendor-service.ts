@@ -43,9 +43,9 @@ export const fetchVendor = async ({ origin, slug, storeId, sid = null }) => {
 }
 
 export const fetchProductsOfVendor = async ({
+  query = '',
   slug,
   origin,
-  page,
   sid = null,
   storeId,
 }) => {
@@ -53,18 +53,18 @@ export const fetchProductsOfVendor = async ({
 
   // if (isServer) {
   //   res = await getBySid(
-  //     `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
+  //     `es/products?vendors=${slug}store=${storeId}&${query}`,
   //     sid
   //   )
   // } else {
   //   res = await getAPI(
-  //     `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
+  //     `es/products?vendors=${slug}store=${storeId}&${query}`,
   //     origin
   //   )
   // }
 
   res = await getAPI(
-    `es/products?vendors=${slug}&page=${page}&store=${storeId}`,
+    `es/products?vendors=${slug}store=${storeId}&${query}`,
     origin, sid
   )
 

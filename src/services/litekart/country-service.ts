@@ -15,6 +15,20 @@ export const fetchCountries = async ({ origin, storeId, sid = null }: any) => {
   return res
 }
 
+export const fetchAllCountries = async ({ origin, storeId, sid = null }: any) => {
+  let res: any = {}
+
+  // if (isServer) {
+  //   res = await getBySid(`countries/all?limit=500&page=0&store=${storeId}`, sid)
+  // } else {
+  //   res = await getAPI(`countries/all?limit=500&page=0&store=${storeId}`, origin)
+  // }
+    
+  res = await getAPI(`countries/all?limit=500&page=0&store=${storeId}`, origin, sid)
+
+  return res
+}
+
 export const fetchStates = async ({
   origin,
   storeId,

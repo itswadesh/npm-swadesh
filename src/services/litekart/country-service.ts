@@ -5,12 +5,12 @@ export const fetchCountries = async ({ origin, storeId, sid = null }: any) => {
   let res: any = {}
 
   // if (isServer) {
-  //   res = await getBySid(`countries?limit=500&page=0&store=${storeId}`, sid)
+  //   res = await getBySid(`countries?limit=500&page=0&sort=name&store=${storeId}`, sid)
   // } else {
-  //   res = await getAPI(`countries?limit=500&page=0&store=${storeId}`, origin)
+  //   res = await getAPI(`countries?limit=500&page=0&sort=name&store=${storeId}`, origin)
   // }
     
-  res = await getAPI(`countries?limit=500&page=0&store=${storeId}`, origin, sid)
+  res = await getAPI(`countries?limit=500&page=0&sort=name&store=${storeId}`, origin, sid)
 
   return res
 }
@@ -19,12 +19,12 @@ export const fetchAllCountries = async ({ origin, storeId, sid = null }: any) =>
   let res: any = {}
 
   // if (isServer) {
-  //   res = await getBySid(`countries/all?limit=500&page=0&store=${storeId}`, sid)
+  //   res = await getBySid(`countries/all?limit=500&page=0&sort=name&store=${storeId}`, sid)
   // } else {
-  //   res = await getAPI(`countries/all?limit=500&page=0&store=${storeId}`, origin)
+  //   res = await getAPI(`countries/all?limit=500&page=0&sort=name&store=${storeId}`, origin)
   // }
     
-  res = await getAPI(`countries/all?limit=500&page=0&store=${storeId}`, origin, sid)
+  res = await getAPI(`countries/all?limit=500&page=0&sort=name&store=${storeId}`, origin, sid)
 
   return res
 }

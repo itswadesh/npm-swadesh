@@ -1,7 +1,8 @@
 import { getAPI, post } from './../../utils/api'
 
-export const fetchOrders = async ({ query = '', status = null, origin = null, sid = null, storeId }) => {
-		const res : any = await getAPI(`orders/my?store=${storeId}&status=${status}&active=true&${query}`,  origin, sid)
+export const fetchOrders = async ({ query = '', status = null, statuses = null, origin = null, sid = null, storeId }) => {
+  const res: any = await getAPI(`orders/my?store=${storeId}&status=${status}&statuses=${statuses}&active=true&${query}`,  origin, sid)
+
 		return {
 			count: res.count || 0,
 			data: res.data || [],

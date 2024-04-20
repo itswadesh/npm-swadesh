@@ -29,12 +29,13 @@ export const fetchProfileData = async ({ origin, storeId, sid = null }: any) => 
 }
 
 export const signupService = async ({
+  email,
   firstName,
   lastName,
-  phone,
-  email,
   password,
   passwordConfirmation,
+  phone,
+  role = "user",
   storeId,
   origin,
   sid = null
@@ -45,11 +46,12 @@ export const signupService = async ({
     `signup`,
     origin,
     {
+      email,
       firstName,
       lastName,
-      phone,
-      email,
       password,
+      phone,
+      role,
       passwordConfirmation,
       store: storeId
     },

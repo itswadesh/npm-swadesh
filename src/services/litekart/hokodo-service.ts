@@ -260,6 +260,7 @@ export const updateCreditLimit = async ({
 
 export const savePaymentInfo = async ({
     deferred_payment_id,
+    hokodo_company_id,
     hokodo_payment_offer_id,
     order_no,
     payment_plan_id,
@@ -274,6 +275,7 @@ export const savePaymentInfo = async ({
         origin,
         {
             deferred_payment_id,
+            hokodo_company_id,
             hokodo_payment_offer_id,
             order_no,
             payment_plan_id,

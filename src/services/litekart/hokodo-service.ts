@@ -77,6 +77,7 @@ export const createCompany = async ({
 
 export const createOrganisation = async ({
     company_id,
+    credit,
     origin,
     sid = null,
     storeId,
@@ -88,6 +89,7 @@ export const createOrganisation = async ({
         origin,
         {
             company_id,
+            credit,
             store: storeId
         },
         sid

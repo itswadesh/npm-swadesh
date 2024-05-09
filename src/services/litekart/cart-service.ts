@@ -23,6 +23,7 @@ export const fetchCartData = async ({
 
 export const fetchRefreshCart = async ({
   cartId,
+  paymnetFlow,
   origin = null,
   sid = null,
   storeId
@@ -44,7 +45,7 @@ export const fetchRefreshCart = async ({
     // }
 
     res = await getAPI(
-      `carts/refresh-cart?store=${storeId}&cart_id=${cartId}`,
+      `carts/refresh-cart?store=${storeId}&cart_id=${cartId}&paymnet_flow=${paymnetFlow}`,
       origin,
       sid
     )

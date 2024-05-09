@@ -127,6 +127,7 @@ export const createUser = async ({
 
 export const getCreditLimit = async ({
     company_id,
+    organisation_id,
     origin,
     sid = null,
     storeId,
@@ -135,12 +136,12 @@ export const getCreditLimit = async ({
 
     if (company_id) {
         // if (isServer) {
-        //     res = await getBySid(`hokodo-onboarding/get-credit-limit?company_id=${company_id}&store=${storeId}`, sid)
+        //     res = await getBySid(`hokodo-onboarding/get-credit-limit?company_id=${company_id}&organisation_id=${organisation_id}&store=${storeId}`, sid)
         // } else {
-        //     res = await getAPI(`hokodo-onboarding/get-credit-limit?company_id=${company_id}&store=${storeId}`, origin)
+        //     res = await getAPI(`hokodo-onboarding/get-credit-limit?company_id=${company_id}&organisation_id=${organisation_id}&store=${storeId}`, origin)
         // }
 
-        res = await getAPI(`hokodo-onboarding/get-credit-limit?company_id=${company_id}&store=${storeId}`, origin, sid)
+        res = await getAPI(`hokodo-onboarding/get-credit-limit?company_id=${company_id}&organisation_id=${organisation_id}&store=${storeId}`, origin, sid)
     }
 
     return res

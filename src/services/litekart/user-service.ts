@@ -262,8 +262,7 @@ export const verifyEmail = async ({
   token,
   origin,
   sid = null,
-  storeId,
-  isServer
+  storeId
 }) => {
   let res = {}
 
@@ -288,7 +287,8 @@ export const verifyEmail = async ({
       expires,
       signature,
       token,
-      store: storeId
+      store: storeId,
+      origin
     },
     sid
   )

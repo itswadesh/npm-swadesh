@@ -53,7 +53,8 @@ export const signupService = async ({
       phone,
       role,
       passwordConfirmation,
-      store: storeId
+      store: storeId,
+      origin
     },
     sid
   )

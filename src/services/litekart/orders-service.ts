@@ -313,6 +313,23 @@ export const razorpayCapture = async ({
   return res || {}
 }
 
+export const stripeCheckoutV2 = async ({ address, paymentMethodId, origin, cartId, storeId }) => {
+		let res = {}
+		res = await post(
+			`checkout/stripe-v2`,
+      origin,
+			{
+				address,
+				paymentMethodId,
+				cart_id: cartId,
+				store: storeId,
+				return_url: `${origin}/payment/process`
+			},
+			origin
+		)
+		return res || {}
+}
+
 export const stripeCheckoutService = async ({
   address,
   paymentMethodId,

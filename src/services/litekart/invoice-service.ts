@@ -37,7 +37,7 @@ export const fetchAllRetailerInvoices = async ({ query = '', isCors = false, ori
 	// 	res = await getAPI(`get-all-invoices?store=${storeId}&${query}`, origin)
 	// }
 
-	res = await getAPI(`/api/invoices-of-retailer?store=${storeId}`, origin, sid)
+	res = await getAPI(`invoices-of-retailer?store=${storeId}`, origin, sid)
 
 	return res || {}
 }

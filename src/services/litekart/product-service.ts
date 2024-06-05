@@ -20,6 +20,20 @@ export const fetchProducts = async ({
   return res || {}
 }
 
+export const fetchBailVariation = async ({
+  query = '',
+  origin,
+  sid = null,
+  storeId
+}: any) => {
+  let res: any = {}
+
+  res = await getAPI(`varni/list-bail-variation?store=${storeId}&${query}`, origin, sid)
+
+  return res || {}
+}
+
+
 export const fetchReels = async ({ origin, storeId, sid = null }: any) => {
   let res: any = {}
 

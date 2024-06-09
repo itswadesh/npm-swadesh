@@ -61,6 +61,7 @@ export const fetchCategory = async ({
 
 export const fetchAllCategories = async ({
   featured = false,
+  home = false,
   limit = null,
   origin,
   sid = null,
@@ -72,6 +73,10 @@ export const fetchAllCategories = async ({
 
   if (featured) {
     catQ += '&featured=true'
+  }
+
+  if (home) {
+    catQ += '&home=true'
   }
 
   // if (isServer || isCors) {

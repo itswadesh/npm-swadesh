@@ -59,6 +59,25 @@ export const fetchCategory = async ({
   return res || {}
 }
 
+export const fetchCategories = async ({
+  query = 'active=true',
+  origin,
+  sid = null,
+  storeId
+}) => {
+  let res: any = {}
+
+  let catQ = `categories?store=${storeId}&${query}`
+
+  res = await getAPI(catQ, origin, sid)
+
+  const currentPage = res.currentPage
+  const data = res.data
+  const pageSize = res.pageSize
+
+  return { data, pageSize, currentPage }
+}
+
 export const fetchAllCategories = async ({
   featured = false,
   home = false,
@@ -181,10 +200,7 @@ export const fetchCategoriesSelectedByUser = async ({
   //   )
   // }
 
-  data = await getAPI(
-    `category-selected-by-user?store=${storeId}`,
-    origin, sid
-  )
+  data = await getAPI(`category-selected-by-user?store=${storeId}`, origin, sid)
 
   return data || []
 }

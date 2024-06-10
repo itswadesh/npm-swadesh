@@ -1,20 +1,24 @@
 import { getAPI } from './../../utils/api'
 
-export const fetchVendors = async ({ query = '', origin, storeId, sid = null }) => {
+export const fetchVendors = async ({
+  origin,
+  storeId,
+  query = null,
+  sid = null
+}) => {
   let res: any = {}
-
-  // if (isServer) {
-  //   res = await getBySid(`vendors?store=${storeId}&${query}`, sid)
-  // } else {
-  //   res = await getAPI(`vendors?store=${storeId}&${query}`, origin)
-  // }
 
   res = await getAPI(`vendors?store=${storeId}&${query}`, origin, sid)
 
   return res || {}
 }
 
-export const fetchEsVendors = async ({ query = '', origin, storeId, sid = null }) => {
+export const fetchEsVendors = async ({
+  query = '',
+  origin,
+  storeId,
+  sid = null
+}) => {
   let res: any = {}
 
   // if (isServer) {
@@ -47,7 +51,7 @@ export const fetchProductsOfVendor = async ({
   slug,
   origin,
   sid = null,
-  storeId,
+  storeId
 }) => {
   let res = {}
 
@@ -65,13 +69,18 @@ export const fetchProductsOfVendor = async ({
 
   res = await getAPI(
     `es/products?vendors=${slug}&store=${storeId}&${query}`,
-    origin, sid
+    origin,
+    sid
   )
 
   return res || {}
 }
 
-export const fetchVendorByProductCategory = async ({ origin, sid = null, storeId }) => {
+export const fetchVendorByProductCategory = async ({
+  origin,
+  sid = null,
+  storeId
+}) => {
   let res = {}
 
   // if (isServer) {
@@ -80,7 +89,11 @@ export const fetchVendorByProductCategory = async ({ origin, sid = null, storeId
   //   res = await getAPI(`vendor-by-product-category-discount?store=${storeId}`, origin)
   // }
 
-  res = await getAPI(`vendor-by-product-category-discount?store=${storeId}`, origin, sid)
+  res = await getAPI(
+    `vendor-by-product-category-discount?store=${storeId}`,
+    origin,
+    sid
+  )
 
   return res || {}
 }

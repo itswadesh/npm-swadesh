@@ -60,14 +60,18 @@ export const fetchCategory = async ({
 }
 
 export const fetchCategories = async ({
-  query = 'active=true',
   origin,
-  sid = null,
-  storeId
+  storeId,
+  query = null,
+  sid = null
 }) => {
   let res: any = {}
 
-  let catQ = `categories?store=${storeId}&${query}`
+  let catQ = `categories?store=${storeId}`
+
+  if (query) {
+    catQ += `&${query}`
+  }
 
   res = await getAPI(catQ, origin, sid)
 

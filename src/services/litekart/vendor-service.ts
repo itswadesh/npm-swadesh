@@ -8,7 +8,13 @@ export const fetchVendors = async ({
 }) => {
   let res: any = {}
 
-  res = await getAPI(`vendors?store=${storeId}&${query}`, origin, sid)
+  let q = `vendors?store=${storeId}`
+
+  if (query) {
+    q += `&${query}`
+  }
+
+  res = await getAPI(q, origin, sid)
 
   return res || {}
 }
